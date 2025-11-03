@@ -15,18 +15,18 @@ pico_sdk_init()
 file(GLOB_RECURSE SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
 # Create a static library target
-add_library(SharedLib STATIC
+add_library(Shared STATIC
     ${SOURCE_FILES}
 )
 
 # Link against required Pico libraries
-target_link_libraries(SharedLib
+target_link_libraries(Shared
     pico_stdlib
     pico_cyw43_arch_none
     hardware_adc
 )
 
 # Include directory for headers
-target_include_directories(SharedLib PUBLIC
+target_include_directories(Shared PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/include
 )
