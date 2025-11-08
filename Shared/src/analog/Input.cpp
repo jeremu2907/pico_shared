@@ -25,10 +25,10 @@ void Input::runLoop()
     for (auto &input : s_inputQueue)
     {
         adc_select_input(input->m_adcIdx);
+        sleep_ms(10);
         auto raw = adc_read();
-        float voltage = (raw / 4095.0f) * 3.3f;
+        float voltage = (raw / PICO_2_W_ADC_RESOLUTION) * MAX_VOLTAGE;
         input->callback(voltage);
-        printf("%f\n", voltage);
     }
 }
 
