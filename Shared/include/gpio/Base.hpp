@@ -4,21 +4,24 @@
 #include <vector>
 #include <cstdio>
 #include <map>
-#include "pico/cyw43_arch.h"
 #include "pico/stdlib.h"
 
 #include "Macro.hpp"
 
-namespace Digital
+#if PICO_BOARD_TYPE == PICO_W
+#include "pico/cyw43_arch.h"
+#endif
+
+namespace Gpio
 {
-    class Gpio
+    class Base
     {
     private:
         inline static std::map<uint, bool> s_claimedPinMap{};
 
     public:
-        Gpio(uint gpio);
-        ~Gpio();
+        Base(uint gpio);
+        ~Base();
 
         uint gpio() const;
         virtual void init();

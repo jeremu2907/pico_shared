@@ -19,12 +19,19 @@ add_library(Shared STATIC
     ${SOURCE_FILES}
 )
 
-# Link against required Pico libraries
-target_link_libraries(Shared
+set(BASE_LIBS
     pico_stdlib
-    pico_cyw43_arch_none
     hardware_adc
+    hardware_i2c
 )
+
+# Link against required Pico libraries
+if(PICO_BOARD STREQUAL "pico_w")
+    list(APPEND BASE_LIBS pico_cyw43_arch_none)  # or pico_cyw43_arch_none, depending on your use
+endif()
+
+# Add the standard library to the build
+target_link_libraries(Shared PUBLIC ${BASE_LIBS})
 
 # Include directory for headers
 target_include_directories(Shared PUBLIC

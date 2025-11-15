@@ -1,15 +1,15 @@
-#include "digital/Output.hpp"
+#include "gpio/Output.hpp"
 
-using namespace Digital;
+using namespace Gpio;
 
-Output::Output(uint gpio): Gpio(gpio)
+Output::Output(uint gpio): Base(gpio)
 {
     init();
 }
 
 void Output::init()
 {
-    Gpio::init();
+    Base::init();
     gpio_set_dir(m_gpio, true);
 }
 

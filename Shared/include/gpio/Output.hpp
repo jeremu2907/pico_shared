@@ -3,11 +3,11 @@
 #include "pico/stdlib.h"
 #include <functional>
 
-#include "Gpio.hpp"
+#include "Base.hpp"
 
-namespace Digital
+namespace Gpio
 {
-    class Output : public Gpio
+    class Output : public Base
     {
     public:
         explicit Output(uint gpio);

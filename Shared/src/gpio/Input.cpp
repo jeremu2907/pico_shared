@@ -1,8 +1,8 @@
-#include "digital/Input.hpp"
+#include "gpio/Input.hpp"
 
-using namespace Digital;
+using namespace Gpio;
 
-Input::Input(uint gpio) : Gpio(gpio)
+Input::Input(uint gpio) : Base(gpio)
 {
     init();
     s_inputQueue.emplace_back(this);
@@ -16,7 +16,7 @@ Input::~Input()
 
 void Input::init()
 {
-    Gpio::init();
+    Base::init();
     gpio_set_dir(m_gpio, false);
     gpio_pull_up(m_gpio);
 }

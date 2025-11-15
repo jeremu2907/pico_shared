@@ -4,11 +4,11 @@
 #include <thread>
 #include <atomic>
 
-#include "Gpio.hpp"
+#include "Base.hpp"
 
-namespace Digital
+namespace Gpio
 {
-    class Input : public Gpio
+    class Input : public Base
     {
     private:
         inline static std::vector<Input *> s_inputQueue = {};

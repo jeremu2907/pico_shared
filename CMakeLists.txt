@@ -23,7 +23,11 @@ if (EXISTS ${picoVscode})
     include(${picoVscode})
 endif()
 # ====================================================================================
-set(PICO_BOARD pico_w CACHE STRING "Board type")
+# Valid values:
+#   pico
+#   pico2
+#   pico_w
+set(PICO_BOARD pico2 CACHE STRING "Board type")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
@@ -52,13 +56,16 @@ pico_set_program_version(Main "0.1")
 pico_enable_stdio_uart(Main 1)
 pico_enable_stdio_usb(Main 1)
 
-# Add the standard library to the build
-target_link_libraries(
-    Main
+set(BASE_LIBS
     Shared
-    pico_stdlib
-    pico_cyw43_arch_none
 )
+
+if(PICO_BOARD STREQUAL "pico_w")
+    list(APPEND BASE_LIBS pico_cyw43_arch_none)  # or pico_cyw43_arch_none, depending on your use
+endif()
+
+# Add the standard library to the build
+target_link_libraries(Main ${BASE_LIBS})
 
 # Add the standard include files to the build
 target_include_directories(Main PRIVATE
