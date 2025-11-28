@@ -33,7 +33,7 @@ int main()
         size_t end = start + 128;
         for(size_t segment = 128 * page; segment < end ; segment++)
         {
-            screenData[segment] = 0x1;
+            screenData[segment] = 0xFF;
         }
     }
 
