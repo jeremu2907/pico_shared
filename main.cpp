@@ -7,10 +7,6 @@
 #include "i2c/Ssd1306.h"
 #include "Macro.hpp"
 
-void setHigh(std::vector<Gpio::Output> &ledVector, uint gpio);
-void setLow(std::vector<Gpio::Output> &ledVector, uint gpio);
-void draw_circle(int cx, int cy, int r, uint8_t screen[]);
-
 int main()
 {
 #if PICO_BOARD_TYPE == PICO_W
@@ -30,24 +26,24 @@ int main()
     // draw_circle(64, 32, 20, screen);
     
     I2c::Ssd1306 oled;
-    // oled.writeBlocking(screen, size);
-    // while(true)
-    // {
-    //     printf("write size %d", oled.writeBlocking(screen, size));
-    // }
+    uint8_t screenData[8 * 128] = {0};
+    for(size_t page = 0; page < 8; page *= 2)
+    {
+        size_t start = 128 * page;
+        size_t end = start + 128;
+        for(size_t segment = 128 * page; segment < end ; segment++)
+        {
+            screenData[segment] = 0x1;
+        }
+    }
+
+    while(true)
+    {
+        printf("write size %d", oled.writeScreen(screenData, 8 * 128));
+    }
 
     MAIN_LOOP_START
     Gpio::Input::runLoop();
     Adc::Input::runLoop();
     MAIN_LOOP_END
-}
-
-void setHigh(std::vector<Gpio::Output> &ledVector, uint gpio)
-{
-    ledVector.at(gpio).setHigh();
-}
-
-void setLow(std::vector<Gpio::Output> &ledVector, uint gpio)
-{
-    ledVector.at(gpio).setLow();
 }

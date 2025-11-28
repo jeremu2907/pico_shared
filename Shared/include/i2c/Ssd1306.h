@@ -12,6 +12,15 @@ namespace I2c
 {
     class Ssd1306
     {
+        enum class ControlByte : uint8_t
+        {
+            // [Co#][D/C#]00 0000
+            NO_CO_COMMAND = 0x00,
+            NO_CO_DATA = 0x40,
+            CO_COMMAND = 0x80,
+            CO_DATA = 0xC0
+        };
+
         enum class Command : uint8_t
         {
             SET_CONTRAST = 0x81,            // Followed by 1 byte: contrast level (0–255)
@@ -51,6 +60,7 @@ namespace I2c
 
     private:
         inline static bool s_init = false;
+        inline static uint8_t s_HW_ADDR = 0x3C;
 
     public:
         explicit Ssd1306();
@@ -58,9 +68,16 @@ namespace I2c
 
         void scan();
 
-        int writeBlocking(const uint8_t *src, size_t len, bool nostop = true);
+        /// @brief This function writes to GDDRAM assuming Horizontal Addressing Mode
+        /// @param src data array pointer. Each byte is a a segment, representing 8-bit
+        /// column data for the screen. There are 128 segments per page (row) and 8 pages [0:7].
+        /// The array thus should be in the form of src[i] = data at page[i / 128] segment[i % 128]
+        /// @param len size of src in bytes
+        /// @return number of bytes written, negative if error
+        int writeScreen(const uint8_t *src, size_t len);
 
     private:
+        int writeBlocking(const uint8_t *src, size_t len, bool nostop = true);
         bool isReservedAddr(uint8_t addr);
 
         uint m_baudrate;
