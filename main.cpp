@@ -7,11 +7,10 @@
 #include "i2c/Ssd1306.h"
 #include "i2c/Font8x8.h"
 #include "Macro.hpp"
-#include "BoardType.h"
 
 int main()
 {
-#if PICO_BOARD_TYPE == PICO_W
+#if PICO_BOARD_TYPE == PICO_W || PICO_BOARD_TYPE == PICO_2_W
     if (cyw43_arch_init())
     {
         printf("Wi-Fi init failed!\n");

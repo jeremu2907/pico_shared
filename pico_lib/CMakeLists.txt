@@ -26,8 +26,8 @@ set(BASE_LIBS
 )
 
 # Link against required Pico libraries
-if(PICO_BOARD STREQUAL "pico_w")
-    list(APPEND BASE_LIBS pico_cyw43_arch_none)  # or pico_cyw43_arch_none, depending on your use
+if((PICO_BOARD STREQUAL "pico_w") OR (PICO_BOARD STREQUAL "pico2_w"))
+    list(APPEND BASE_LIBS pico_cyw43_arch_none)
 endif()
 
 # Add the standard library to the build

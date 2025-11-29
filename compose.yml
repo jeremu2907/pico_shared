@@ -3,8 +3,11 @@ services:
     platform: linux/arm64
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     network_mode: host
     volumes:
-      - ./:/root/app
+      - ./build:/root/app/build
+      - ./pico_lib:/root/pico_lib
+      - ./main.cpp/:/root/app/main.cpp:ro
+      - ./CMakeLists.txt:/root/app/CMakeLists.txt
     command: ["sleep", "infinity"]

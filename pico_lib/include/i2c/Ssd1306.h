@@ -78,6 +78,8 @@ namespace I2c
         /// @return number of bytes written, negative if error
         int writeScreen(const uint8_t *src, size_t len);
 
+        void clearScreen();
+
     private:
         int writeBlocking(const uint8_t *src, size_t len, bool nostop = true);
         bool isReservedAddr(uint8_t addr);

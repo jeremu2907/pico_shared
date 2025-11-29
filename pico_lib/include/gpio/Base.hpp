@@ -7,10 +7,12 @@
 #include "pico/stdlib.h"
 
 #include "Macro.hpp"
-#include "BoardType.h"
 
-#if PICO_BOARD_TYPE == PICO_W
+#if PICO_BOARD_TYPE == PICO_W || PICO_BOARD_TYPE == PICO_2_W
+#pragma message(">>> Compiling for PICO_W / PICO_2_W (cyw43 included)")
 #include "pico/cyw43_arch.h"
+#else
+#pragma message(">>> Compiling for PICO / PICO_2 (cyw43 NOT included)")
 #endif
 
 namespace Gpio

@@ -30,7 +30,7 @@ void Base::init()
 
 void Base::onboardLedOn()
 {
-#if PICO_BOARD_TYPE == PICO_W
+#if PICO_BOARD_TYPE == PICO_W || PICO_BOARD_TYPE == PICO_2_W
     cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
 #else
     const uint LED_PIN = 25;
@@ -43,7 +43,7 @@ void Base::onboardLedOn()
 
 void Base::onboardLedOff()
 {
-#if PICO_BOARD_TYPE == PICO_W
+#if PICO_BOARD_TYPE == PICO_W || PICO_BOARD_TYPE == PICO_2_W
     cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
 #else
     const uint LED_PIN = 25;
