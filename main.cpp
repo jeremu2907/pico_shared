@@ -5,6 +5,7 @@
 #include "gpio/Input.hpp"
 #include "adc/Input.hpp"
 #include "i2c/Ssd1306.h"
+#include "i2c/Font8x8.h"
 #include "Macro.hpp"
 
 int main()
@@ -26,20 +27,16 @@ int main()
     // draw_circle(64, 32, 20, screen);
     
     I2c::Ssd1306 oled;
-    uint8_t screenData[8 * 128] = {0x00};
-    for(size_t page = 0; page < 8; page += 2)
-    {
-        size_t start = 128 * page;
-        size_t end = start + 128;
-        for(size_t segment = 128 * page; segment < end ; segment++)
-        {
-            screenData[segment] = 0xFF;
-        }
-    }
 
+    double i = 0.0;
     while(true)
     {
+        sleep_ms(500);
+        std::string s = std::to_string(i);
+        uint8_t screenData[8 * 128] = {0x00};
+        Font8x8::getFont(screenData, s);
         printf("write size %d", oled.writeScreen(screenData, 8 * 128));
+        i += 0.5;
     }
 
     MAIN_LOOP_START
