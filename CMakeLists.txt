@@ -40,7 +40,7 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_subdirectory(Shared)
+add_subdirectory(Shared/pico_lib)
 
 add_executable(Main
     main.cpp
@@ -62,8 +62,6 @@ set(BASE_LIBS
 )
 
 if(PICO_BOARD STREQUAL "pico_w")
-    list(APPEND BASE_LIBS pico_cyw43_arch_none)
-elseif(PICO_BOARD STREQUAL "pico2_w")
     list(APPEND BASE_LIBS pico_cyw43_arch_none)
 endif()
 

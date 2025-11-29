@@ -1,0 +1,10 @@
+services:
+  pico_sdk:
+    platform: linux/arm64
+    build:
+      context: .
+      dockerfile: Dockerfile
+    network_mode: host
+    volumes:
+      - ../:/root/app
+    command: ["sleep", "infinity"]
