@@ -29,4 +29,4 @@ ENV PICO_SDK_PATH=/root/pico-sdk
 ENV PICO_TOOLCHAIN_PATH=/opt/arm-toolchain
 ENV PATH="${PICO_TOOLCHAIN_PATH}/bin:${PATH}"
 
-CMD ["/bin/bash"]
+COPY pico_lib ./pico_lib
