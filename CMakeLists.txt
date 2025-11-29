@@ -27,7 +27,6 @@ endif()
 #   pico
 #   pico2
 #   pico_w
-#   pico2_w
 set(PICO_BOARD pico2 CACHE STRING "Board type")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
@@ -40,7 +39,7 @@ pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_subdirectory(Shared/pico_lib)
+add_subdirectory(pico_lib)
 
 add_executable(Main
     main.cpp
