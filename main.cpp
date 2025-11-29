@@ -26,8 +26,8 @@ int main()
     // draw_circle(64, 32, 20, screen);
     
     I2c::Ssd1306 oled;
-    uint8_t screenData[8 * 128] = {0};
-    for(size_t page = 0; page < 8; page *= 2)
+    uint8_t screenData[8 * 128] = {0x00};
+    for(size_t page = 0; page < 8; page += 2)
     {
         size_t start = 128 * page;
         size_t end = start + 128;
