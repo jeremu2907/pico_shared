@@ -20,11 +20,6 @@ int main()
 
     stdio_init_all();
     Gpio::Base::onboardLedOn();
-
-    // size_t size = SCREEN_WIDTH * (SCREEN_HEIGHT / 8);
-    // uint8_t screen[size];
-    // memset(screen, 255, size);
-    // draw_circle(64, 32, 20, screen);
     
     I2c::Ssd1306 oled;
 
