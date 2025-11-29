@@ -1,9 +1,5 @@
 #pragma once
 
-#define PICO 0
-#define PICO_W 1
-#define PICO_BOARD_TYPE PICO
-
 #define ERR_START while (true) { sleep_ms(1000);
 #define ERR_END tight_loop_contents(); }
 

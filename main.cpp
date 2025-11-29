@@ -7,6 +7,7 @@
 #include "i2c/Ssd1306.h"
 #include "i2c/Font8x8.h"
 #include "Macro.hpp"
+#include "BoardType.h"
 
 int main()
 {

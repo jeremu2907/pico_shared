@@ -7,6 +7,7 @@
 #include "pico/stdlib.h"
 
 #include "Macro.hpp"
+#include "BoardType.h"
 
 #if PICO_BOARD_TYPE == PICO_W
 #include "pico/cyw43_arch.h"
