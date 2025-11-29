@@ -27,6 +27,7 @@ endif()
 #   pico
 #   pico2
 #   pico_w
+#   pico2_w
 set(PICO_BOARD pico2 CACHE STRING "Board type")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
@@ -61,7 +62,9 @@ set(BASE_LIBS
 )
 
 if(PICO_BOARD STREQUAL "pico_w")
-    list(APPEND BASE_LIBS pico_cyw43_arch_none)  # or pico_cyw43_arch_none, depending on your use
+    list(APPEND BASE_LIBS pico_cyw43_arch_none)
+elseif(PICO_BOARD STREQUAL "pico2_w")
+    list(APPEND BASE_LIBS pico_cyw43_arch_none)
 endif()
 
 # Add the standard library to the build
