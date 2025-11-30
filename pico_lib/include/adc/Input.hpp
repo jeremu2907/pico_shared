@@ -9,17 +9,19 @@
 #include "hardware/adc.h"
 #include "pico/stdlib.h"
 
-#include "Macro.hpp"
-
-#define GPIO_26_ADC 0
-#define GPIO_27_ADC 1
-#define GPIO_28_ADC 2
-#define PICO_2_W_ADC_RESOLUTION 4095.0f
+#include "Macros.hpp"
+#include "Constants.hpp"
 
 namespace Adc
 {
     class Input
     {
+    public:
+        static inline constexpr uint GPIO_26_ADC = 0;
+        static inline constexpr uint GPIO_27_ADC = 1;
+        static inline constexpr uint GPIO_28_ADC = 2;
+        static inline constexpr float PICO_2_W_ADC_RESOLUTION = 4095.0f;
+
     private:
         inline static std::map<uint, bool> s_claimedPinMap{};
         inline static std::vector<Input *> s_inputQueue = {};

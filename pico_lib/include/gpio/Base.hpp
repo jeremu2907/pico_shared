@@ -6,9 +6,9 @@
 #include <map>
 #include "pico/stdlib.h"
 
-#include "Macro.hpp"
+#include "Macros.hpp"
 
-#if PICO_BOARD_TYPE == PICO_W || PICO_BOARD_TYPE == PICO_2_W
+#if IS_WIRELESS
 #pragma message(">>> Compiling for PICO_W / PICO_2_W (cyw43 included)")
 #include "pico/cyw43_arch.h"
 #else

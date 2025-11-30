@@ -6,13 +6,12 @@
 #include "pico/stdlib.h"
 #include "hardware/i2c.h"
 
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 64
-#define DEFAULT_BAUDRATE_HZ 400000
+#include "Base.h"
+#include "Font8x8.h"
 
 namespace I2c
 {
-    class Ssd1306
+    class Ssd1306 : public Base
     {
         enum class ControlByte : uint8_t
         {
@@ -60,31 +59,39 @@ namespace I2c
 
         };
 
+    public:
+        static inline constexpr uint8_t SSD1306_ADDR = 0x3C;
+        static inline constexpr uint SEGMENTS_PER_PAGE = 128;
+        static inline constexpr uint NUM_PAGES = 8;
+
     private:
-        inline static bool s_init = false;
-        inline static uint8_t s_HW_ADDR = 0x3C;
+        static inline constexpr size_t s_TOTAL_SEGMENTS = SEGMENTS_PER_PAGE * NUM_PAGES;
+        static inline constexpr size_t s_DATA_SIZE = s_TOTAL_SEGMENTS + 1;
 
     public:
-        explicit Ssd1306();
+        explicit Ssd1306(uint gpioSda = PICO_DEFAULT_I2C_SDA_PIN,
+                         uint gpioScl = PICO_DEFAULT_I2C_SCL_PIN,
+                         i2c_inst_t *busInstance = i2c0);
+
         ~Ssd1306();
 
-        void scan();
+        /// @brief This function writes a string to GDDRAM assuming Horizontal Adressing Mode
+        /// @param s content to be written
+        /// @param startPos starting position
+        /// @return 
+        void setData(std::string s, size_t startPos = 0);
 
-        /// @brief This function writes to GDDRAM assuming Horizontal Addressing Mode
-        /// @param src data array pointer. Each byte is a a segment, representing 8-bit
-        /// column data for the screen. There are 128 segments per page (row) and 8 pages [0:7].
-        /// The array thus should be in the form of src[i] = data at page[i / 128] segment[i % 128]
-        /// @param len size of src in bytes
-        /// @return number of bytes written, negative if error
-        int writeScreen(const uint8_t *src, size_t len);
+        int writeData();
 
-        void clearScreen();
+        void clearData();
+
+        int writeRaw(const uint8_t *src, size_t len) override;
 
     private:
-        int writeBlocking(const uint8_t *src, size_t len, bool nostop = true);
-        bool isReservedAddr(uint8_t addr);
+        uint8_t m_data[s_DATA_SIZE] = {0x00};
 
-        uint m_baudrate;
-        uint m_addr;
+        // The following 2 variables keeps track of the longest sequence with non-0x00
+        size_t m_data_left_ptr = 0;
+        size_t m_data_right_ptr = s_TOTAL_SEGMENTS;
     };
 }

@@ -7,8 +7,8 @@
 class Font8x8
 {
 public:
-    static void getFont(uint8_t *buf, std::string s);
-    static void getFont(uint8_t *buf, char c);
+    static void getBmp(uint8_t *buf, std::string s, size_t *startPos = nullptr, size_t *endPos = nullptr);
+    static void getBmp(uint8_t *buf, char c);
 
 private:
     inline static const uint8_t m_font[128][8] = {
