@@ -25,11 +25,7 @@ int main()
 
     MAIN_LOOP_START
     oled.clearData();
-    oled.setData("\nHello World!\nTest newline...\n\nBye bye...");
-    oled.writeData();
-    sleep_ms(3000);
-    oled.clearData();
-    oled.setData("\nThis line might\n\nactually be\n\nlong, so please\n\nbe nice to it!");
+    oled.setData(" !\"#$%&'()*+,-./0123456789:;<=>?@{|}~[\\]^_`\nABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz");
     oled.writeData();
     sleep_ms(3000);
     Gpio::Input::runLoop();

@@ -1,6 +1,7 @@
 docker compose up pico_sdk --build --force-recreate --remove-orphans -d
 
 docker compose exec -it pico_sdk sh -c "\
+  cp -r /root/pico-sdk/* /root/.pico-sdk/ && \
   cp /root/pico-sdk/external/pico_sdk_import.cmake /root/app/ && \
   cp /root/pico-sdk/external/pico_sdk_import.cmake /root/pico_lib/ && \
   cd /root/app && \

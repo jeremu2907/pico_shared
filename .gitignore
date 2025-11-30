@@ -2,3 +2,4 @@ build
 .vscode
 pico_sdk_import.cmake
 pico_lib/include/BoardType.h
+.pico-sdk
