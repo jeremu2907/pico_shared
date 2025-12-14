@@ -1,34 +1,27 @@
-#include <vector>
-#include <cstring>
+#include "pico/stdlib.h"
+#include "pico/cyw43_arch.h"
 
-#include "gpio/Output.hpp"
-#include "gpio/Input.hpp"
-#include "adc/Input.hpp"
-#include "i2c/Ssd1306.h"
-#include "i2c/Font8x8.h"
 #include "Macros.hpp"
 
 int main()
 {
-#if IS_WIRELESS
-    if (cyw43_arch_init())
-    {
-        printf("Wi-Fi init failed!\n");
-        return 1;
-    }
-#endif
-
     stdio_init_all();
-    Gpio::Base::onboardLedOn();
-    
-    I2c::Ssd1306 oled(20, 21, i2c0);
 
-    MAIN_LOOP_START
-    oled.clearData();
-    oled.setData(" !\"#$%&'()*+,-./0123456789:;<=>?@{|}~[\\]^_`\nABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz");
-    oled.writeData();
-    sleep_ms(3000);
-    Gpio::Input::runLoop();
-    Adc::Input::runLoop();
-    MAIN_LOOP_END
+    if(cyw43_arch_init())
+    {
+        ERR_START
+        printf("CYW43 init failed\n");
+        ERR_END
+    }
+    
+    while (true)
+    {
+        printf("LED ON\n");
+        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
+        sleep_ms(500);
+        
+        printf("LED OFF\n");
+        cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 0);
+        sleep_ms(500);
+    }
 }

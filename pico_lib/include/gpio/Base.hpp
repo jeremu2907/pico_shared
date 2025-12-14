@@ -8,13 +8,6 @@
 
 #include "Macros.hpp"
 
-#if IS_WIRELESS
-#pragma message(">>> Compiling for PICO_W / PICO_2_W (cyw43 included)")
-#include "pico/cyw43_arch.h"
-#else
-#pragma message(">>> Compiling for PICO / PICO_2 (cyw43 NOT included)")
-#endif
-
 namespace Gpio
 {
     class Base
