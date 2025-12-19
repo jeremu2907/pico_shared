@@ -1,4 +1,13 @@
-docker compose up pico_sdk --force-recreate --remove-orphans -d
+#!/usr/bin/env bash
+set -e
+
+BUILD_FLAG=""
+
+if [[ "$1" == "--build" ]]; then
+    BUILD_FLAG="--build"
+fi
+
+docker compose up pico_sdk $BUILD_FLAG --force-recreate --remove-orphans -d
 
 docker compose exec -it pico_sdk sh -c "\
   cp /root/pico-sdk/external/pico_sdk_import.cmake /root/app/ && \

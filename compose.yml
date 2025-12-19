@@ -3,7 +3,7 @@ services:
     platform: linux/arm64
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.dev.master
     network_mode: host
     volumes:
       - ./build:/root/app/build
