@@ -3,3 +3,4 @@ build
 pico_sdk_import.cmake
 pico_lib/include/BoardType.h
 .pico-sdk
+.DS_Store

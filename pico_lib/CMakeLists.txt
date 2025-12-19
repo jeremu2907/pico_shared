@@ -8,7 +8,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 # include(pico_sdk_import.cmake)
 # pico_sdk_init()
 
-file(GLOB_RECURSE SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
+file(GLOB_RECURSE SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp" "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
 
 # Create a static library target
 add_library(Shared STATIC
@@ -22,6 +22,13 @@ target_link_libraries(Shared
     hardware_adc
     hardware_i2c
 )
+
+if((PICO_BOARD STREQUAL "pico_w") OR (PICO_BOARD STREQUAL "pico2_w"))
+    target_link_libraries(Shared PRIVATE
+        pico_lwip_nosys
+        pico_cyw43_arch_none
+    )
+endif()
 
 target_include_directories(Shared PUBLIC
     ${CMAKE_CURRENT_LIST_DIR}/include
