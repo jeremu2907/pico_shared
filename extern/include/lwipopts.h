@@ -1,24 +1,3 @@
-// // NO_SYS = 1 for polling/bare-metal mode
-// #define NO_SYS 1
-
-// #define LWIP_IPV4 1
-// #define LWIP_UDP  1
-// #define LWIP_TCP  1
-// #define LWIP_ARP  1
-// #define LWIP_DNS  1
-
-// // DHCP (client + Pico server)
-// #define LWIP_DHCP         1
-// #define LWIP_DHCP_SERVER  1
-
-// // Disable sockets
-// #define LWIP_SOCKET 0
-// #define LWIP_NETCONN 0
-
-// // Required for AP DHCP
-// #define DHCP_DOES_ARP_CHECK 0
-
-
 #pragma once
 
 

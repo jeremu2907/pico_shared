@@ -1,6 +1,7 @@
 #ifndef DHCP_SERVER_H
 #define DHCP_SERVER_H
 
+#include "lwipopts.h"
 #include "lwip/ip_addr.h"
 
 #define DHCPS_BASE_IP (16)

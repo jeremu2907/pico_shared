@@ -8,6 +8,7 @@ services:
     volumes:
       - ./build:/root/app/build
       - ./pico_lib:/root/pico_lib
+      - ./extern:/root/app/extern:ro
       - ./main.cpp:/root/app/main.cpp:ro
       - ./CMakeLists.txt:/root/app/CMakeLists.txt
     command: ["sleep", "infinity"]

@@ -4,6 +4,7 @@
 #include <string.h>
 #include <cstring>
 
+#include "lwipopts.h"
 #include "pico/cyw43_arch.h"
 #include "pico/stdlib.h"
 

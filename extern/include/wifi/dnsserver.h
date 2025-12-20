@@ -1,6 +1,7 @@
 #ifndef DNS_SERVER_H
 #define DNS_SERVER_H
 
+#include "lwipopts.h"
 #include "lwip/ip_addr.h"
 
 typedef struct dns_server_t_ {
