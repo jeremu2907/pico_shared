@@ -17,7 +17,7 @@ Input::~Input()
 void Input::init()
 {
     Base::init();
-    gpio_set_dir(m_gpio, false);
+    gpio_set_dir(m_gpio, GPIO_IN);
     gpio_pull_up(m_gpio);
 }
 
@@ -26,15 +26,14 @@ void Input::runLoop()
     if(!s_running) return;
     for (auto &input : s_inputQueue)
     {
-        // Active - Low invert logic by Pull-Up Resistor
         input->m_high = gpio_get(input->m_gpio);
         if (input->m_high)
         {
-            input->callbackLow();
+            input->callbackHigh();
         }
         else
         {
-            input->callbackHigh();
+            input->callbackLow();
         }
     }
 }
