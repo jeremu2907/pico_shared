@@ -2,10 +2,29 @@
 set -e
 
 BUILD_FLAG=""
+DOXYGEN_FLAG=""
 
-if [[ "$1" == "--build" ]]; then
-    BUILD_FLAG="--build"
-fi
+for arg in "$@"; do
+    case $arg in
+        -b|--build)
+            BUILD_FLAG="--build"
+            ;;
+        -d|--docs)
+            DOXYGEN_FLAG="&& cd /root/pico_lib/include && doxygen /root/app/docs/Doxyfile"
+            ;;
+        -h|--help)
+            echo "Usage: $0 [-b|--build] [-d|--docs]"
+            echo "  -b, --build   Build the project"
+            echo "  -d, --docs    Generate Doxygen docs"
+            exit 0
+            ;;
+        *)
+            echo "Unknown option: $arg"
+            echo "Usage: $0 [-b|--build] [-d|--docs]"
+            exit 1
+            ;;
+    esac
+done
 
 docker compose up pico_sdk $BUILD_FLAG --force-recreate --remove-orphans -d
 
@@ -15,6 +34,7 @@ docker compose exec -it pico_sdk sh -c "\
   cd /root/app && \
   cmake -S . -B build && \
   cmake --build build -j\$(nproc) \
+  $DOXYGEN_FLAG
 "
 
 docker compose down

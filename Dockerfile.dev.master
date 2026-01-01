@@ -12,13 +12,26 @@ RUN apt update && apt install -y \
     build-essential \
     ninja-build \
     wget \
-    ca-certificates
+    ca-certificates \
+    flex \
+    bison \
+    libc6
 
 # Install official ARM GCC toolchain
 RUN wget https://developer.arm.com/-/media/Files/downloads/gnu/14.3.rel1/binrel/arm-gnu-toolchain-14.3.rel1-aarch64-arm-none-eabi.tar.xz && \
     tar -xf arm-gnu-toolchain-14.3.rel1-aarch64-arm-none-eabi.tar.xz && \
     mv arm-gnu-toolchain-14.3.rel1-aarch64-arm-none-eabi /opt/arm-toolchain && \
     rm arm-gnu-toolchain-14.3.rel1-aarch64-arm-none-eabi.tar.xz
+
+# Install doxygen
+RUN wget https://www.doxygen.nl/files/doxygen-1.15.0.src.tar.gz && \
+    tar -xzf doxygen-1.15.0.src.tar.gz && \
+    cd doxygen-1.15.0 && \
+    mkdir build && \
+    cd build && \
+    cmake -GNinja .. && \
+    cmake --build . && \
+    cmake --install .
 
 # Clone Pico SDK at specific stable version
 RUN git clone --branch master https://github.com/raspberrypi/pico-sdk.git && \
