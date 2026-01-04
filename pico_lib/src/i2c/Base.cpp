@@ -7,9 +7,9 @@ Base::Base(uint addr, uint gpioSda, uint gpioScl, i2c_inst_t *busInstance) : m_g
                                                                            m_addr(addr)
 {
     m_busNumber = (busInstance == i2c0) ? 0 : 1;
-    if (s_initializedBusMap.count(m_busNumber) == 0)
+    if (m_sInitializedBusMap.count(m_busNumber) == 0)
     {
-        s_initializedBusMap[m_busNumber] = true;
+        m_sInitializedBusMap[m_busNumber] = true;
         m_baudrate = i2c_init(busInstance, DEFAULT_BAUDRATE_HZ);
     }
 
@@ -21,7 +21,7 @@ Base::Base(uint addr, uint gpioSda, uint gpioScl, i2c_inst_t *busInstance) : m_g
 
 Base::~Base()
 {
-    s_initializedBusMap.erase(m_busNumber);
+    m_sInitializedBusMap.erase(m_busNumber);
 }
 
 void Base::scan()

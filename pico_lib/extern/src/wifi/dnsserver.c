@@ -48,7 +48,7 @@ static int dns_socket_bind(struct udp_pcb **udp, uint32_t ip, uint16_t port) {
     IP4_ADDR(&addr, ip >> 24 & 0xff, ip >> 16 & 0xff, ip >> 8 & 0xff, ip & 0xff);
     err_t err = udp_bind(*udp, &addr, port);
     if (err != ERR_OK) {
-        printf("dns failed to bind to port %u: %d", port, err);
+        //printf("dns failed to bind to port %u: %d", port, err);
         assert(false);
     }
     return err;
@@ -60,13 +60,13 @@ static void dump_bytes(const uint8_t *bptr, uint32_t len) {
 
     for (i = 0; i < len;) {
         if ((i & 0x0f) == 0) {
-            printf("\n");
+            //printf("\n");
         } else if ((i & 0x07) == 0) {
-            printf(" ");
+            //printf(" ");
         }
-        printf("%02x ", bptr[i++]);
+        //printf("%02x ", bptr[i++]);
     }
-    printf("\n");
+    //printf("\n");
 }
 #endif
 
@@ -77,7 +77,7 @@ static int dns_socket_sendto(struct udp_pcb **udp, const void *buf, size_t len, 
 
     struct pbuf *p = pbuf_alloc(PBUF_TRANSPORT, len, PBUF_RAM);
     if (p == NULL) {
-        printf("DNS: Failed to send message out of memory\n");
+        //printf("DNS: Failed to send message out of memory\n");
         return -ENOMEM;
     }
 
@@ -87,7 +87,7 @@ static int dns_socket_sendto(struct udp_pcb **udp, const void *buf, size_t len, 
     pbuf_free(p);
 
     if (err != ERR_OK) {
-        printf("DNS: Failed to send message %d\n", err);
+        //printf("DNS: Failed to send message %d\n", err);
         return err;
     }
 
@@ -99,7 +99,7 @@ static int dns_socket_sendto(struct udp_pcb **udp, const void *buf, size_t len, 
 
 static void dns_server_process(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *src_addr, u16_t src_port) {
     dns_server_t *d = arg;
-    printf("dns_server_process %u\n", p->tot_len);
+    //printf("dns_server_process %u\n", p->tot_len);
 
     uint8_t dns_msg[MAX_DNS_MSG_SIZE];
     dns_header_t *dns_hdr = (dns_header_t*)dns_msg;
@@ -116,9 +116,9 @@ static void dns_server_process(void *arg, struct udp_pcb *upcb, struct pbuf *p, 
     uint16_t flags = lwip_ntohs(dns_hdr->flags);
     uint16_t question_count = lwip_ntohs(dns_hdr->question_count);
 
-    printf("len %d\n", msg_len);
-    printf("dns flags 0x%x\n", flags);
-    printf("dns question count 0x%x\n", question_count);
+    //printf("len %d\n", msg_len);
+    //printf("dns flags 0x%x\n", flags);
+    //printf("dns question count 0x%x\n", question_count);
 
     // flags from rfc1035
     // +--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+--+
@@ -127,24 +127,24 @@ static void dns_server_process(void *arg, struct udp_pcb *upcb, struct pbuf *p, 
 
     // Check QR indicates a query
     if (((flags >> 15) & 0x1) != 0) {
-        printf("Ignoring non-query\n");
+        //printf("Ignoring non-query\n");
         goto ignore_request;
     }
 
     // Check for standard query
     if (((flags >> 11) & 0xf) != 0) {
-        printf("Ignoring non-standard query\n");
+        //printf("Ignoring non-standard query\n");
         goto ignore_request;
     }
 
     // Check question count
     if (question_count < 1) {
-        printf("Invalid question count\n");
+        //printf("Invalid question count\n");
         goto ignore_request;
     }
 
-    // Print the question
-    printf("question: ");
+    // //print the question
+    //printf("question: ");
     const uint8_t *question_ptr_start = dns_msg + sizeof(dns_header_t);
     const uint8_t *question_ptr_end = dns_msg + msg_len;
     const uint8_t *question_ptr = question_ptr_start;
@@ -154,22 +154,22 @@ static void dns_server_process(void *arg, struct udp_pcb *upcb, struct pbuf *p, 
             break;
         } else {
             if (question_ptr > question_ptr_start) {
-                printf(".");
+                //printf(".");
             }
             int label_len = *question_ptr++;
             if (label_len > 63) {
-                printf("Invalid label\n");
+                //printf("Invalid label\n");
                 goto ignore_request;
             }
-            printf("%.*s", label_len, question_ptr);
+            //printf("%.*s", label_len, question_ptr);
             question_ptr += label_len;
         }
     }
-    printf("\n");
+    //printf("\n");
 
     // Check question length
     if (question_ptr - question_ptr_start > 255) {
-        printf("Invalid question length\n");
+        //printf("Invalid question length\n");
         goto ignore_request;
     }
 
@@ -207,7 +207,7 @@ static void dns_server_process(void *arg, struct udp_pcb *upcb, struct pbuf *p, 
     dns_hdr->additional_record_count = 0;
 
     // Send the reply
-    printf("Sending %d byte reply to %s:%d\n", answer_ptr - dns_msg, ipaddr_ntoa(src_addr), src_port);
+    //printf("Sending %d byte reply to %s:%d\n", answer_ptr - dns_msg, ipaddr_ntoa(src_addr), src_port);
     dns_socket_sendto(&d->udp, &dns_msg, answer_ptr - dns_msg, src_addr, src_port);
 
 ignore_request:
@@ -216,15 +216,15 @@ ignore_request:
 
 void dns_server_init(dns_server_t *d, ip_addr_t *ip) {
     if (dns_socket_new_dgram(&d->udp, d, dns_server_process) != ERR_OK) {
-        printf("dns server failed to start\n");
+        //printf("dns server failed to start\n");
         return;
     }
     if (dns_socket_bind(&d->udp, 0, PORT_DNS_SERVER) != ERR_OK) {
-        printf("dns server failed to bind\n");
+        //printf("dns server failed to bind\n");
         return;
     }
     ip_addr_copy(d->ip, *ip);
-    printf("dns server listening on port %d\n", PORT_DNS_SERVER);
+    //printf("dns server listening on port %d\n", PORT_DNS_SERVER);
 }
 
 void dns_server_deinit(dns_server_t *d) {

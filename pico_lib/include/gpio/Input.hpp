@@ -11,8 +11,8 @@ namespace Gpio
     class Input : public Base
     {
     private:
-        inline static std::vector<Input *> s_inputQueue = {};
-        inline static bool s_running = true;
+        inline static std::vector<Input *> m_sInputQueue = {};
+        inline static bool m_sRunning = true;
 
     public:
         explicit Input(uint gpio);

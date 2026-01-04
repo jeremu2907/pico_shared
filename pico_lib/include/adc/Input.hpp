@@ -23,10 +23,10 @@ namespace Adc
         static inline constexpr float PICO_2_W_ADC_RESOLUTION = 4095.0f;
 
     private:
-        inline static std::map<uint, bool> s_claimedPinMap{};
-        inline static std::vector<Input *> s_inputQueue = {};
-        inline static bool s_init = false;
-        inline static bool s_running = true;
+        inline static std::map<uint, bool> m_sClaimedPinMap{};
+        inline static std::vector<Input *> m_sInputQueue = {};
+        inline static bool m_sInit = false;
+        inline static bool m_sRunning = true;
 
     public:
         explicit Input(uint gpio, uint adcIdx);
@@ -36,6 +36,9 @@ namespace Adc
 
         static void runLoop();
 
+        /// @brief Installs callback on ADC input voltage is sampled
+        /// @tparam Func of type void(float voltage)
+        /// @param f callback takes in 1 arg that is the voltage float
         template <typename Func>
         void installCallback(Func f)
         {

@@ -80,3 +80,13 @@ void AccessPoint::onDhcpClientConnect()
 {
     m_sCallbackOnDhcpConnect();
 }
+
+void AccessPoint::setDhcpLeaseTimeS(uint seconds)
+{
+    m_sDhcpLeaseTimeS = seconds;
+}
+
+uint AccessPoint::getDhcpLeaseTimeS()
+{
+    return m_sDhcpLeaseTimeS;
+}

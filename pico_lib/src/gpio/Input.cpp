@@ -5,13 +5,13 @@ using namespace Gpio;
 Input::Input(uint gpio) : Base(gpio)
 {
     init();
-    s_inputQueue.emplace_back(this);
+    m_sInputQueue.emplace_back(this);
 }
 
 Input::~Input()
 {
-    s_running = false;
-    s_inputQueue.clear();
+    m_sRunning = false;
+    m_sInputQueue.clear();
 }
 
 void Input::init()
@@ -23,8 +23,8 @@ void Input::init()
 
 void Input::runLoop()
 {
-    if(!s_running) return;
-    for (auto &input : s_inputQueue)
+    if(!m_sRunning) return;
+    for (auto &input : m_sInputQueue)
     {
         input->m_high = gpio_get(input->m_gpio);
         if (input->m_high)

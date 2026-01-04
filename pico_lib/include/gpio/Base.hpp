@@ -13,7 +13,7 @@ namespace Gpio
     class Base
     {
     private:
-        inline static std::map<uint, bool> s_claimedPinMap{};
+        inline static std::map<uint, bool> m_sClaimedPinMap{};
 
     public:
         Base(uint gpio);

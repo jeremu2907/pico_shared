@@ -15,7 +15,7 @@ namespace I2c
         static inline constexpr uint DEFAULT_BAUDRATE_HZ = 400000;
 
     private:
-        inline static std::map<uint, bool> s_initializedBusMap{};
+        inline static std::map<uint, bool> m_sInitializedBusMap{};
 
     public:
         Base(uint addr,

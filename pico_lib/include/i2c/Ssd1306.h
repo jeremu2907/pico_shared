@@ -65,8 +65,8 @@ namespace I2c
         static inline constexpr uint NUM_PAGES = 8;
 
     private:
-        static inline constexpr size_t s_TOTAL_SEGMENTS = SEGMENTS_PER_PAGE * NUM_PAGES;
-        static inline constexpr size_t s_DATA_SIZE = s_TOTAL_SEGMENTS + 1;
+        static inline constexpr size_t TOTAL_SEGMENTS = SEGMENTS_PER_PAGE * NUM_PAGES;
+        static inline constexpr size_t DATA_SIZE = TOTAL_SEGMENTS + 1;
 
     public:
         explicit Ssd1306(uint gpioSda = PICO_DEFAULT_I2C_SDA_PIN,
@@ -88,10 +88,10 @@ namespace I2c
         int writeRaw(const uint8_t *src, size_t len) override;
 
     private:
-        uint8_t m_data[s_DATA_SIZE] = {0x00};
+        uint8_t m_data[DATA_SIZE] = {0x00};
 
         // The following 2 variables keeps track of the longest sequence with non-0x00
         size_t m_data_left_ptr = 0;
-        size_t m_data_right_ptr = s_TOTAL_SEGMENTS;
+        size_t m_data_right_ptr = TOTAL_SEGMENTS;
     };
 }

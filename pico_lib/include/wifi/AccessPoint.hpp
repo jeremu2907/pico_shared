@@ -3,6 +3,8 @@
 #include <string>
 #include <functional>
 
+#include <pico/stdlib.h>
+
 typedef struct dns_server_t_ dns_server_t;
 
 namespace Wifi
@@ -23,6 +25,8 @@ namespace Wifi
         ~AccessPoint();
 
         void runLoop();
+        
+        void setDhcpLeaseTimeS(uint seconds);
 
         template <typename Func>
         static void installCallbackOnTcpAccept(Func f)
@@ -37,8 +41,9 @@ namespace Wifi
         }
 
     private:
-        static void onTcpAccept();
+        static uint getDhcpLeaseTimeS();
 
+        static void onTcpAccept();
         static void onDhcpClientConnect();
 
         std::string ssid;
@@ -48,6 +53,7 @@ namespace Wifi
         DhcpServer *dhcp_server = nullptr;
         dns_server_t *dns_server = nullptr;
 
+        inline static uint m_sDhcpLeaseTimeS = 24 * 60 * 60;
         inline static std::function<void()> m_sCallbackOnTcpAccept = []() {};
         inline static std::function<void()> m_sCallbackOnDhcpConnect = []() {};
     };

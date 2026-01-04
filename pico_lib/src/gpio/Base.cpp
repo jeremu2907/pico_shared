@@ -4,7 +4,7 @@ using namespace Gpio;
 
 Base::Base(uint gpio) : m_gpio(gpio), m_high(false)
 {
-    if (s_claimedPinMap.count(gpio) > 0)
+    if (m_sClaimedPinMap.count(gpio) > 0)
     {
         ERR_START
         printf("Error: GPIO %u already claimed!\n", gpio);
@@ -15,7 +15,7 @@ Base::Base(uint gpio) : m_gpio(gpio), m_high(false)
 
 Base::~Base()
 {
-    s_claimedPinMap.erase(m_gpio);
+    m_sClaimedPinMap.erase(m_gpio);
 }
 
 uint Base::gpio() const
@@ -24,7 +24,7 @@ uint Base::gpio() const
 }
 void Base::init()
 {
-    s_claimedPinMap[m_gpio] = true;
+    m_sClaimedPinMap[m_gpio] = true;
     gpio_init(m_gpio);
 }
 

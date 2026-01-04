@@ -38,7 +38,7 @@ using namespace Wifi;
 #define PORT_DHCP_SERVER (67)
 #define PORT_DHCP_CLIENT (68)
 
-#define DEFAULT_LEASE_TIME_S (24 * 60 * 60) // in seconds
+#define DEFAULT_LEASE_TIME_S AccessPoint::getDhcpLeaseTimeS()
 
 #define MAC_LEN (6)
 #define MAKE_IP4(a, b, c, d) ((a) << 24 | (b) << 16 | (c) << 8 | (d))
