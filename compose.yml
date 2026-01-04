@@ -8,7 +8,7 @@ services:
     volumes:
       - ./build:/root/app/build
       - ./pico_lib:/root/pico_lib
-      - ./extern:/root/app/extern:ro
+      # - ./extern:/root/app/extern:ro
       - ./main.cpp:/root/app/main.cpp:ro
       - ./docs:/root/app/docs
       - ./CMakeLists.txt:/root/app/CMakeLists.txt

@@ -5,10 +5,6 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(PROJECT_NAME "Extern")
 
-# Pull in the Pico SDK
-# include(pico_sdk_import.cmake)
-# pico_sdk_init()
-
 file(GLOB_RECURSE SOURCE_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.c")
 
 # Create a static library target
