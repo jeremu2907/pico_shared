@@ -1,11 +1,11 @@
 #pragma once
 
 #include <map>
-#include <stdio.h>
-#include <cstring>
 
 #include "pico/stdlib.h"
 #include "hardware/i2c.h"
+
+#include "gpio/Base.hpp"
 
 namespace I2c
 {
@@ -43,9 +43,12 @@ namespace I2c
         i2c_inst_t *getBusInstance();
 
         uint m_addr;
-        uint m_gpioScl;
-        uint m_gpioSda;
         uint m_baudrate;
         uint m_busNumber;
+        Gpio::Base m_gpioScl;
+        Gpio::Base m_gpioSda;
+
+    private:
+        void init();
     };
 }

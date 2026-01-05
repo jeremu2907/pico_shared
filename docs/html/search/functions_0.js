@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['base_0',['Base',['../classGpio_1_1Base.html#a146d7eff7200c1358df9ca9c7054ee8b',1,'Gpio::Base']]]
+  ['installcallback_0',['installCallback',['../classAdc_1_1Input.html#a71d94ff57aee7d9024958d5414677786',1,'Adc::Input']]]
 ];

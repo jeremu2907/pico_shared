@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gpio_0',['gpio',['../classGpio_1_1Base.html#a0e64e86759ec18aebdc3d75add8d0270',1,'Gpio::Base']]]
+  ['setdata_0',['setData',['../classI2c_1_1Ssd1306.html#afda607bcdc3bb773618824203603149b',1,'I2c::Ssd1306']]]
 ];

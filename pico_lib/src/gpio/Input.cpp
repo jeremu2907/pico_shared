@@ -16,7 +16,7 @@ Input::~Input()
 
 void Input::init()
 {
-    Base::init();
+    gpio_init(m_gpio);
     gpio_set_dir(m_gpio, GPIO_IN);
     gpio_pull_up(m_gpio);
 }
@@ -26,8 +26,8 @@ void Input::runLoop()
     if(!m_sRunning) return;
     for (auto &input : m_sInputQueue)
     {
-        input->m_high = gpio_get(input->m_gpio);
-        if (input->m_high)
+        bool high = gpio_get(input->m_gpio);
+        if (high)
         {
             input->callbackHigh();
         }

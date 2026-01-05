@@ -1,7 +1,6 @@
 #pragma once
 
 #include "pico/stdlib.h"
-#include <functional>
 
 #include "Base.hpp"
 

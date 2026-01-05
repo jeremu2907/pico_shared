@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['gpio_0',['gpio',['../classGpio_1_1Base.html#a0e64e86759ec18aebdc3d75add8d0270',1,'Gpio::Base']]]
+  ['dhcpserver_0',['DhcpServer',['../structWifi_1_1DhcpServer.html',1,'Wifi']]],
+  ['dhcpservercallback_1',['DhcpServerCallback',['../classWifi_1_1DhcpServerCallback.html',1,'Wifi']]],
+  ['dhcpserverlease_2',['DhcpServerLease',['../structWifi_1_1DhcpServerLease.html',1,'Wifi']]]
 ];

@@ -1,8 +1,6 @@
 #pragma once
 
 #include <functional>
-#include <thread>
-#include <atomic>
 
 #include "Base.hpp"
 
@@ -17,8 +15,6 @@ namespace Gpio
     public:
         explicit Input(uint gpio);
         ~Input();
-
-        void init() override;
 
         static void runLoop();
 
@@ -35,10 +31,12 @@ namespace Gpio
         }
 
     private:
-        void callbackHigh();
-        void callbackLow();
+        void init() override;
 
-        std::function<void()> m_callbackHigh;
+        void callbackLow();
+        void callbackHigh();
+
         std::function<void()> m_callbackLow;
+        std::function<void()> m_callbackHigh;
     };
 }

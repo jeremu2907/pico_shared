@@ -73,7 +73,7 @@ namespace I2c
                          uint gpioScl = PICO_DEFAULT_I2C_SCL_PIN,
                          i2c_inst_t *busInstance = i2c0);
 
-        ~Ssd1306();
+        ~Ssd1306() = default;
 
         /// @brief This function writes a string to GDDRAM assuming Horizontal Adressing Mode
         /// @param s content to be written

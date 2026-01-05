@@ -2,7 +2,10 @@
 #include "pico/cyw43_arch.h"
 
 #include "wifi/AccessPoint.hpp"
+#include "pwm/Output.hpp"
 #include "Macros.hpp"
+
+#include "pico/cyw43_arch.h"
 
 int main()
 {
@@ -14,18 +17,29 @@ int main()
         return 1;
     }
 
-    Wifi::AccessPoint ap("pico_test_ap", "password");
-    ap.installCallbackOnDhcpConnect(
-        []()
-        {
-            printf("##############################\n");
-            printf("Hello\n");
-            printf("##############################\n");
-        }
-    );
+    cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
+    // Wifi::AccessPoint ap("pico_test_ap", "password");
+    // ap.installCallbackOnDhcpConnect(
+    //     []()
+    //     {
+    //         printf("##############################\n");
+    //         printf("Hello\n");
+    //         printf("##############################\n");
+    //     }
+    // );
+
+    Pwm::Output pwm(0, 20000, 1000);
 
     MAIN_LOOP_START
-    ap.runLoop();
+    // ap.runLoop();
+    pwm.setPwmDutyPeriodMicroS(1000);
+    sleep_ms(100);
+    pwm.setPwmDutyPeriodMicroS(1500);
+    sleep_ms(100);
+    pwm.setPwmDutyPeriodMicroS(2000);
+    sleep_ms(100);
+    pwm.setPwmDutyPeriodMicroS(1500);
+    sleep_ms(100);
     MAIN_LOOP_END
 
     cyw43_arch_deinit();

@@ -12,6 +12,9 @@ for arg in "$@"; do
         -d|--docs)
             DOXYGEN_FLAG="&& cd /root/pico_lib/include && doxygen /root/app/docs/Doxyfile"
             ;;
+        --force-recreate)
+            FORCE_RECREATE_FLAG="--force-recreate"
+            ;;
         -h|--help)
             echo "Usage: $0 [-b|--build] [-d|--docs]"
             echo "  -b, --build   Build the project"
@@ -26,7 +29,7 @@ for arg in "$@"; do
     esac
 done
 
-docker compose up pico_sdk $BUILD_FLAG --force-recreate --remove-orphans -d
+docker compose up pico_sdk $BUILD_FLAG $FORCE_RECREATE_FLAG --remove-orphans -d
 
 docker compose exec -it pico_sdk sh -c "\
   cp /root/pico-sdk/external/pico_sdk_import.cmake /root/app/ && \

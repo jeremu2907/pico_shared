@@ -1,22 +1,27 @@
+#include <stdio.h>
+#include <cstring>
+
 #include "i2c/Base.h"
+#include "Macros.hpp"
 
 using namespace I2c;
 
 Base::Base(uint addr, uint gpioSda, uint gpioScl, i2c_inst_t *busInstance) : m_gpioSda(gpioSda),
-                                                                           m_gpioScl(gpioScl),
-                                                                           m_addr(addr)
+                                                                             m_gpioScl(gpioScl),
+                                                                             m_addr(addr)
 {
     m_busNumber = (busInstance == i2c0) ? 0 : 1;
-    if (m_sInitializedBusMap.count(m_busNumber) == 0)
+
+    if (m_sInitializedBusMap.count(m_busNumber) > 0)
     {
-        m_sInitializedBusMap[m_busNumber] = true;
-        m_baudrate = i2c_init(busInstance, DEFAULT_BAUDRATE_HZ);
+        ERR_START
+        printf("Error: Bus number %u already claimed!\n", m_busNumber);
+        ERR_END
     }
 
-    gpio_set_function(gpioSda, GPIO_FUNC_I2C);
-    gpio_set_function(gpioScl, GPIO_FUNC_I2C);
-    gpio_pull_up(gpioSda);
-    gpio_pull_up(gpioScl);
+    m_sInitializedBusMap[m_busNumber] = true;
+    m_baudrate = i2c_init(busInstance, DEFAULT_BAUDRATE_HZ);
+    init();
 }
 
 Base::~Base()
@@ -70,5 +75,13 @@ bool Base::isReservedAddr(uint8_t addr)
 
 i2c_inst_t *Base::getBusInstance()
 {
-    return (m_busNumber == 0)? i2c0 : i2c1;
+    return (m_busNumber == 0) ? i2c0 : i2c1;
+}
+
+void Base::init()
+{
+    gpio_set_function(m_gpioSda.gpio(), GPIO_FUNC_I2C);
+    gpio_set_function(m_gpioScl.gpio(), GPIO_FUNC_I2C);
+    gpio_pull_up(m_gpioSda.gpio());
+    gpio_pull_up(m_gpioScl.gpio());
 }

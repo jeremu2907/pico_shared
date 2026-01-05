@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(PROJECT_NAME Main)
 
-set(PICO_BOARD pico2_w CACHE STRING "Board type")
+set(PICO_BOARD pico_w CACHE STRING "Board type")
 
 include(/root/pico-sdk/external/pico_sdk_import.cmake)
 

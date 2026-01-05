@@ -20,6 +20,7 @@ target_link_libraries(${PROJECT_NAME}
     pico_stdlib
     hardware_adc
     hardware_i2c
+    hardware_pwm
 )
 
 if((PICO_BOARD STREQUAL "pico_w") OR (PICO_BOARD STREQUAL "pico2_w"))

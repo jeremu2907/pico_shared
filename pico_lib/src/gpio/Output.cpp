@@ -9,7 +9,7 @@ Output::Output(uint gpio): Base(gpio)
 
 void Output::init()
 {
-    Base::init();
+    gpio_init(m_gpio);
     gpio_set_dir(m_gpio, GPIO_OUT);
 }
 
@@ -25,6 +25,5 @@ void Output::setLow()
 
 void Output::put(bool high)
 {
-    m_high = high;
-    gpio_put(m_gpio, m_high);
+    gpio_put(m_gpio, high);
 }
