@@ -12,8 +12,8 @@ namespace Networking
         struct udp_pcb *udp;
         ip_addr_t ip;
 
-        static void dns_server_init(DnsServer *d, ip_addr_t *ip);
-        static void dns_server_deinit(DnsServer *d);
+        static void dnsServerInit(DnsServer *d, ip_addr_t *ip);
+        static void dnsServerDeinit(DnsServer *d);
     };
 
     struct DnsHeader
@@ -29,13 +29,13 @@ namespace Networking
     class DnsServerCallback
     {
     public:
-        static void dns_socket_free(struct udp_pcb **udp);
-        static int dns_socket_bind(struct udp_pcb **udp, uint32_t ip, uint16_t port);
-        static int dns_socket_new_dgram(struct udp_pcb **udp, void *cb_data, udp_recv_fn cb_udp_recv);
-        static void dns_server_process(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *src_addr, u16_t src_port);
+        static void dnsSocketFree(struct udp_pcb **udp);
+        static int dnsSocketBind(struct udp_pcb **udp, uint32_t ip, uint16_t port);
+        static int dnsSocketNewDgram(struct udp_pcb **udp, void *cb_data, udp_recv_fn cb_udp_recv);
+        static void dnsServerProcess(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *src_addr, u16_t src_port);
 
     private:
-        static int dns_socket_sendto(struct udp_pcb **udp, const void *buf, size_t len, const ip_addr_t *dest, uint16_t port);
+        static int dnsSocketSendTo(struct udp_pcb **udp, const void *buf, size_t len, const ip_addr_t *dest, uint16_t port);
 #if DUMP_DATA
         static void dump_bytes(const uint8_t *bptr, uint32_t len)
         {

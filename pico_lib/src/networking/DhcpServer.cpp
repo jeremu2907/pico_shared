@@ -42,26 +42,26 @@ using namespace Networking;
 #define MAC_LEN (6)
 #define MAKE_IP4(a, b, c, d) ((a) << 24 | (b) << 16 | (c) << 8 | (d))
 
-void DhcpServer::dhcp_server_init(DhcpServer *d, ip_addr_t *ip, ip_addr_t *nm)
+void DhcpServer::dhcpServerInit(DhcpServer *d, ip_addr_t *ip, ip_addr_t *nm)
 {
     ip_addr_copy(d->ip, *ip);
     ip_addr_copy(d->nm, *nm);
     memset(d->lease, 0, sizeof(d->lease));
-    if (DhcpServerCallback::dhcp_socket_new_dgram(&d->udp,
+    if (DhcpServerCallback::dhcpSocketNewDgram(&d->udp,
                                                   d,
-                                                  DhcpServerCallback::dhcp_server_process) != 0)
+                                                  DhcpServerCallback::dhcpServerProcess) != 0)
     {
         return;
     }
-    DhcpServerCallback::dhcp_socket_bind(&d->udp, PORT_DHCP_SERVER);
+    DhcpServerCallback::dhcpSocketBind(&d->udp, PORT_DHCP_SERVER);
 }
 
-void DhcpServer::dhcp_server_deinit(DhcpServer *d)
+void DhcpServer::dhcpServerDeinit(DhcpServer *d)
 {
-    DhcpServerCallback::dhcp_socket_free(&d->udp);
+    DhcpServerCallback::dhcpSocketFree(&d->udp);
 }
 
-int DhcpServerCallback::dhcp_socket_new_dgram(struct udp_pcb **udp, void *cb_data, udp_recv_fn cb_udp_recv)
+int DhcpServerCallback::dhcpSocketNewDgram(struct udp_pcb **udp, void *cb_data, udp_recv_fn cb_udp_recv)
 {
     // family is AF_INET
     // type is SOCK_DGRAM
@@ -78,7 +78,7 @@ int DhcpServerCallback::dhcp_socket_new_dgram(struct udp_pcb **udp, void *cb_dat
     return 0; // success
 }
 
-void DhcpServerCallback::dhcp_socket_free(struct udp_pcb **udp)
+void DhcpServerCallback::dhcpSocketFree(struct udp_pcb **udp)
 {
     if (*udp != NULL)
     {
@@ -87,13 +87,13 @@ void DhcpServerCallback::dhcp_socket_free(struct udp_pcb **udp)
     }
 }
 
-int DhcpServerCallback::dhcp_socket_bind(struct udp_pcb **udp, uint16_t port)
+int DhcpServerCallback::dhcpSocketBind(struct udp_pcb **udp, uint16_t port)
 {
     // TODO convert lwIP errors to errno
     return udp_bind(*udp, IP_ANY_TYPE, port);
 }
 
-int DhcpServerCallback::dhcp_socket_sendto(struct udp_pcb **udp, struct netif *nif, const void *buf, size_t len, uint32_t ip, uint16_t port)
+int DhcpServerCallback::dhcpSocketSendTo(struct udp_pcb **udp, struct netif *nif, const void *buf, size_t len, uint32_t ip, uint16_t port)
 {
     if (len > 0xffff)
     {
@@ -130,7 +130,7 @@ int DhcpServerCallback::dhcp_socket_sendto(struct udp_pcb **udp, struct netif *n
     return len;
 }
 
-uint8_t *DhcpServerCallback::opt_find(uint8_t *opt, uint8_t cmd)
+uint8_t *DhcpServerCallback::optFind(uint8_t *opt, uint8_t cmd)
 {
     for (int i = 0; i < 308 && opt[i] != DHCP_OPT_END;)
     {
@@ -143,7 +143,7 @@ uint8_t *DhcpServerCallback::opt_find(uint8_t *opt, uint8_t cmd)
     return NULL;
 }
 
-void DhcpServerCallback::opt_write_n(uint8_t **opt, uint8_t cmd, size_t n, const void *data)
+void DhcpServerCallback::optWriteN(uint8_t **opt, uint8_t cmd, size_t n, const void *data)
 {
     uint8_t *o = *opt;
     *o++ = cmd;
@@ -152,7 +152,7 @@ void DhcpServerCallback::opt_write_n(uint8_t **opt, uint8_t cmd, size_t n, const
     *opt = o + n;
 }
 
-void DhcpServerCallback::opt_write_u8(uint8_t **opt, uint8_t cmd, uint8_t val)
+void DhcpServerCallback::optWriteU8(uint8_t **opt, uint8_t cmd, uint8_t val)
 {
     uint8_t *o = *opt;
     *o++ = cmd;
@@ -161,7 +161,7 @@ void DhcpServerCallback::opt_write_u8(uint8_t **opt, uint8_t cmd, uint8_t val)
     *opt = o;
 }
 
-void DhcpServerCallback::opt_write_u32(uint8_t **opt, uint8_t cmd, uint32_t val)
+void DhcpServerCallback::optWriteU32(uint8_t **opt, uint8_t cmd, uint32_t val)
 {
     uint8_t *o = *opt;
     *o++ = cmd;
@@ -173,7 +173,7 @@ void DhcpServerCallback::opt_write_u32(uint8_t **opt, uint8_t cmd, uint32_t val)
     *opt = o;
 }
 
-void DhcpServerCallback::dhcp_server_process(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *src_addr, u16_t src_port)
+void DhcpServerCallback::dhcpServerProcess(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *src_addr, u16_t src_port)
 {
     DhcpServer *d = (DhcpServer *)arg;
     (void)upcb;
@@ -203,7 +203,7 @@ void DhcpServerCallback::dhcp_server_process(void *arg, struct udp_pcb *upcb, st
     uint8_t *opt = (uint8_t *)&dhcp_msg.options;
     opt += 4; // assume magic cookie: 99, 130, 83, 99
 
-    uint8_t *msgtype = opt_find(opt, DHCP_OPT_MSG_TYPE);
+    uint8_t *msgtype = optFind(opt, DHCP_OPT_MSG_TYPE);
     if (msgtype == NULL)
     {
         // A DHCP package without MSG_TYPE?
@@ -248,13 +248,13 @@ void DhcpServerCallback::dhcp_server_process(void *arg, struct udp_pcb *upcb, st
             return;
         }
         dhcp_msg.yiaddr[3] = DHCPS_BASE_IP + yi;
-        opt_write_u8(&opt, DHCP_OPT_MSG_TYPE, DHCPOFFER);
+        optWriteU8(&opt, DHCP_OPT_MSG_TYPE, DHCPOFFER);
         break;
     }
 
     case DHCPREQUEST:
     {
-        uint8_t *o = opt_find(opt, DHCP_OPT_REQUESTED_IP);
+        uint8_t *o = optFind(opt, DHCP_OPT_REQUESTED_IP);
         if (o == NULL)
         {
             // Should be NACK
@@ -292,7 +292,7 @@ void DhcpServerCallback::dhcp_server_process(void *arg, struct udp_pcb *upcb, st
         }
         d->lease[yi].expiry = (cyw43_hal_ticks_ms() + DEFAULT_LEASE_TIME_S * 1000) >> 16;
         dhcp_msg.yiaddr[3] = DHCPS_BASE_IP + yi;
-        opt_write_u8(&opt, DHCP_OPT_MSG_TYPE, DHCPACK);
+        optWriteU8(&opt, DHCP_OPT_MSG_TYPE, DHCPACK);
         printf("DHCPS: client connected: MAC=%02x:%02x:%02x:%02x:%02x:%02x IP=%u.%u.%u.%u\n",
                dhcp_msg.chaddr[0], dhcp_msg.chaddr[1], dhcp_msg.chaddr[2], dhcp_msg.chaddr[3], dhcp_msg.chaddr[4], dhcp_msg.chaddr[5],
                dhcp_msg.yiaddr[0], dhcp_msg.yiaddr[1], dhcp_msg.yiaddr[2], dhcp_msg.yiaddr[3]);
@@ -309,12 +309,12 @@ void DhcpServerCallback::dhcp_server_process(void *arg, struct udp_pcb *upcb, st
     }
     }
 
-    opt_write_n(&opt, DHCP_OPT_SERVER_ID, 4, &ip4_addr_get_u32(ip_2_ip4(&d->ip)));
-    opt_write_n(&opt, DHCP_OPT_SUBNET_MASK, 4, &ip4_addr_get_u32(ip_2_ip4(&d->nm)));
-    opt_write_n(&opt, DHCP_OPT_ROUTER, 4, &ip4_addr_get_u32(ip_2_ip4(&d->ip))); // aka gateway; can have multiple addresses
-    opt_write_n(&opt, DHCP_OPT_DNS, 4, &ip4_addr_get_u32(ip_2_ip4(&d->ip)));    // this server is the dns
-    opt_write_u32(&opt, DHCP_OPT_IP_LEASE_TIME, DEFAULT_LEASE_TIME_S);
+    optWriteN(&opt, DHCP_OPT_SERVER_ID, 4, &ip4_addr_get_u32(ip_2_ip4(&d->ip)));
+    optWriteN(&opt, DHCP_OPT_SUBNET_MASK, 4, &ip4_addr_get_u32(ip_2_ip4(&d->nm)));
+    optWriteN(&opt, DHCP_OPT_ROUTER, 4, &ip4_addr_get_u32(ip_2_ip4(&d->ip))); // aka gateway; can have multiple addresses
+    optWriteN(&opt, DHCP_OPT_DNS, 4, &ip4_addr_get_u32(ip_2_ip4(&d->ip)));    // this server is the dns
+    optWriteU32(&opt, DHCP_OPT_IP_LEASE_TIME, DEFAULT_LEASE_TIME_S);
     *opt++ = DHCP_OPT_END;
     struct netif *nif = ip_current_input_netif();
-    dhcp_socket_sendto(&d->udp, nif, &dhcp_msg, opt - (uint8_t *)&dhcp_msg, 0xffffffff, PORT_DHCP_CLIENT);
+    dhcpSocketSendTo(&d->udp, nif, &dhcp_msg, opt - (uint8_t *)&dhcp_msg, 0xffffffff, PORT_DHCP_CLIENT);
 }

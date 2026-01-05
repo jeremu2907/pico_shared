@@ -12,7 +12,7 @@
 
 using namespace Networking;
 
-int DnsServerCallback::dns_socket_new_dgram(struct udp_pcb **udp, void *cb_data, udp_recv_fn cb_udp_recv) {
+int DnsServerCallback::dnsSocketNewDgram(struct udp_pcb **udp, void *cb_data, udp_recv_fn cb_udp_recv) {
     *udp = udp_new();
     if (*udp == NULL) {
         return -ENOMEM;
@@ -21,14 +21,14 @@ int DnsServerCallback::dns_socket_new_dgram(struct udp_pcb **udp, void *cb_data,
     return ERR_OK;
 }
 
-void DnsServerCallback::dns_socket_free(struct udp_pcb **udp) {
+void DnsServerCallback::dnsSocketFree(struct udp_pcb **udp) {
     if (*udp != NULL) {
         udp_remove(*udp);
         *udp = NULL;
     }
 }
 
-int DnsServerCallback::dns_socket_bind(struct udp_pcb **udp, uint32_t ip, uint16_t port) {
+int DnsServerCallback::dnsSocketBind(struct udp_pcb **udp, uint32_t ip, uint16_t port) {
     ip_addr_t addr;
     IP4_ADDR(&addr, ip >> 24 & 0xff, ip >> 16 & 0xff, ip >> 8 & 0xff, ip & 0xff);
     err_t err = udp_bind(*udp, &addr, port);
@@ -55,7 +55,7 @@ void DnsServerCallback::dump_bytes(const uint8_t *bptr, uint32_t len) {
 }
 #endif
 
-int DnsServerCallback::dns_socket_sendto(struct udp_pcb **udp, const void *buf, size_t len, const ip_addr_t *dest, uint16_t port) {
+int DnsServerCallback::dnsSocketSendTo(struct udp_pcb **udp, const void *buf, size_t len, const ip_addr_t *dest, uint16_t port) {
     if (len > 0xffff) {
         len = 0xffff;
     }
@@ -82,9 +82,9 @@ int DnsServerCallback::dns_socket_sendto(struct udp_pcb **udp, const void *buf, 
     return len;
 }
 
-void DnsServerCallback::dns_server_process(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *src_addr, u16_t src_port) {
+void DnsServerCallback::dnsServerProcess(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *src_addr, u16_t src_port) {
     DnsServer *d = (DnsServer *)arg;
-    //printf("dns_server_process %u\n", p->tot_len);
+    //printf("dnsServerProcess %u\n", p->tot_len);
 
     uint8_t dns_msg[MAX_DNS_MSG_SIZE];
     DnsHeader *dns_hdr = (DnsHeader*)dns_msg;
@@ -193,15 +193,15 @@ void DnsServerCallback::dns_server_process(void *arg, struct udp_pcb *upcb, stru
 
     // Send the reply
     //printf("Sending %d byte reply to %s:%d\n", answer_ptr - dns_msg, ipaddr_ntoa(src_addr), src_port);
-    dns_socket_sendto(&d->udp, &dns_msg, answer_ptr - dns_msg, src_addr, src_port);
+    dnsSocketSendTo(&d->udp, &dns_msg, answer_ptr - dns_msg, src_addr, src_port);
 }
 
-void DnsServer::dns_server_init(DnsServer *d, ip_addr_t *ip) {
-    if (DnsServerCallback::dns_socket_new_dgram(&d->udp, d, DnsServerCallback::dns_server_process) != ERR_OK) {
+void DnsServer::dnsServerInit(DnsServer *d, ip_addr_t *ip) {
+    if (DnsServerCallback::dnsSocketNewDgram(&d->udp, d, DnsServerCallback::dnsServerProcess) != ERR_OK) {
         //printf("dns server failed to start\n");
         return;
     }
-    if (DnsServerCallback::dns_socket_bind(&d->udp, 0, PORT_DNS_SERVER) != ERR_OK) {
+    if (DnsServerCallback::dnsSocketBind(&d->udp, 0, PORT_DNS_SERVER) != ERR_OK) {
         //printf("dns server failed to bind\n");
         return;
     }
@@ -209,6 +209,6 @@ void DnsServer::dns_server_init(DnsServer *d, ip_addr_t *ip) {
     //printf("dns server listening on port %d\n", PORT_DNS_SERVER);
 }
 
-void DnsServer::dns_server_deinit(DnsServer *d) {
-    DnsServerCallback::dns_socket_free(&d->udp);
+void DnsServer::dnsServerDeinit(DnsServer *d) {
+    DnsServerCallback::dnsSocketFree(&d->udp);
 }

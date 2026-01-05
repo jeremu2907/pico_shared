@@ -14,17 +14,17 @@ using namespace Networking;
 #define LED_GPIO 0
 #define HTTP_RESPONSE_REDIRECT "HTTP/1.1 302 Redirect\nLocation: http://%s" LED_TEST "\n\n"
 
-void TcpServerCallback::tcp_server_err(void *arg, err_t err)
+void TcpServerCallback::tcpServerErr(void *arg, err_t err)
 {
     TcpConnectState *con_state = (TcpConnectState *)arg;
     if (err != ERR_ABRT)
     {
         // printf("tcp_client_err_fn %d\n", err);
-        tcp_close_client_connection(con_state, con_state->pcb, err);
+        tcpCloseClientConnection(con_state, con_state->pcb, err);
     }
 }
 
-void TcpServerCallback::tcp_server_close(TcpServer *state)
+void TcpServerCallback::tcpServerClose(TcpServer *state)
 {
     if (state->server_pcb)
     {
@@ -34,7 +34,7 @@ void TcpServerCallback::tcp_server_close(TcpServer *state)
     }
 }
 
-bool TcpServerCallback::tcp_server_open(void *arg, const char *ap_name)
+bool TcpServerCallback::tcpServerOpen(void *arg, const char *ap_name)
 {
     TcpServer *state = (TcpServer *)arg;
     // printf("starting server on port %d\n", TCP_PORT);
@@ -65,34 +65,34 @@ bool TcpServerCallback::tcp_server_open(void *arg, const char *ap_name)
     }
 
     tcp_arg(state->server_pcb, state);
-    tcp_accept(state->server_pcb, tcp_server_accept);
+    tcp_accept(state->server_pcb, tcpServerAccept);
 
     // printf("Try connecting to '%s' (press 'd' to disable access point)\n", ap_name);
     return true;
 }
 
-err_t TcpServerCallback::tcp_server_poll(void *arg, tcp_pcb *pcb)
+err_t TcpServerCallback::tcpServerPoll(void *arg, tcp_pcb *pcb)
 {
     // TcpConnectState *con_state = (TcpConnectState *)arg;
     // printf("tcp_server_poll_fn\n");
-    // return tcp_close_client_connection(con_state, pcb, ERR_OK); // Just disconnect clent?
+    // return tcpCloseClientConnection(con_state, pcb, ERR_OK); // Just disconnect clent?
     return ERR_OK;
 }
 
-err_t TcpServerCallback::tcp_server_sent(void *arg, tcp_pcb *pcb, u16_t len)
+err_t TcpServerCallback::tcpServerSent(void *arg, tcp_pcb *pcb, u16_t len)
 {
     TcpConnectState *con_state = (TcpConnectState *)arg;
-    // printf("tcp_server_sent %u\n", len);
+    // printf("tcpServerSent %u\n", len);
     con_state->sent_len += len;
     if (con_state->sent_len >= con_state->header_len + con_state->result_len)
     {
         // printf("all done\n");
-        return tcp_close_client_connection(con_state, pcb, ERR_OK);
+        return tcpCloseClientConnection(con_state, pcb, ERR_OK);
     }
     return ERR_OK;
 }
 
-err_t TcpServerCallback::tcp_server_accept(void *arg, tcp_pcb *client_pcb, err_t err)
+err_t TcpServerCallback::tcpServerAccept(void *arg, tcp_pcb *client_pcb, err_t err)
 {
     TcpServer *state = (TcpServer *)arg;
     if (err != ERR_OK || client_pcb == NULL)
@@ -114,28 +114,28 @@ err_t TcpServerCallback::tcp_server_accept(void *arg, tcp_pcb *client_pcb, err_t
 
     // setup connection to client
     tcp_arg(client_pcb, con_state);
-    tcp_sent(client_pcb, tcp_server_sent);
-    tcp_recv(client_pcb, tcp_server_recv);
-    tcp_poll(client_pcb, tcp_server_poll, POLL_TIME_S * 2);
-    tcp_err(client_pcb, tcp_server_err);
+    tcp_sent(client_pcb, tcpServerSent);
+    tcp_recv(client_pcb, tcpServerRecv);
+    tcp_poll(client_pcb, tcpServerPoll, POLL_TIME_S * 2);
+    tcp_err(client_pcb, tcpServerErr);
 
     Wifi::AccessPoint::onTcpAccept();
 
     return ERR_OK;
 }
 
-err_t TcpServerCallback::tcp_server_recv(void *arg, tcp_pcb *pcb, pbuf *p, err_t err)
+err_t TcpServerCallback::tcpServerRecv(void *arg, tcp_pcb *pcb, pbuf *p, err_t err)
 {
     TcpConnectState *con_state = (TcpConnectState *)arg;
     if (!p)
     {
         // printf("connection closed\n");
-        return tcp_close_client_connection(con_state, pcb, ERR_OK);
+        return tcpCloseClientConnection(con_state, pcb, ERR_OK);
     }
     assert(con_state && con_state->pcb == pcb);
     if (p->tot_len > 0)
     {
-        // printf("tcp_server_recv %d err %d\n", p->tot_len, err);
+        // printf("tcpServerRecv %d err %d\n", p->tot_len, err);
 #if 0
         for (struct pbuf *q = p; q != NULL; q = q->next) {
            //printf("in: %.*s\n", q->len, q->payload);
@@ -167,7 +167,7 @@ err_t TcpServerCallback::tcp_server_recv(void *arg, tcp_pcb *pcb, pbuf *p, err_t
             }
 
             // Generate content
-            con_state->result_len = test_server_content(request, params, con_state->result, sizeof(con_state->result));
+            con_state->result_len = testServerContent(request, params, con_state->result, sizeof(con_state->result));
             // printf("Request: %s?%s\n", request, params);
             // printf("Result: %d\n", con_state->result_len);
 
@@ -175,7 +175,7 @@ err_t TcpServerCallback::tcp_server_recv(void *arg, tcp_pcb *pcb, pbuf *p, err_t
             if (con_state->result_len > sizeof(con_state->result) - 1)
             {
                 printf("Too much result data %d\n", con_state->result_len);
-                return tcp_close_client_connection(con_state, pcb, ERR_CLSD);
+                return tcpCloseClientConnection(con_state, pcb, ERR_CLSD);
             }
 
             // Generate web page
@@ -186,7 +186,7 @@ err_t TcpServerCallback::tcp_server_recv(void *arg, tcp_pcb *pcb, pbuf *p, err_t
                 if (con_state->header_len > sizeof(con_state->headers) - 1)
                 {
                     // printf("Too much header data %d\n", con_state->header_len);
-                    return tcp_close_client_connection(con_state, pcb, ERR_CLSD);
+                    return tcpCloseClientConnection(con_state, pcb, ERR_CLSD);
                 }
             }
             else
@@ -203,7 +203,7 @@ err_t TcpServerCallback::tcp_server_recv(void *arg, tcp_pcb *pcb, pbuf *p, err_t
             if (err != ERR_OK)
             {
                 // printf("failed to write header data %d\n", err);
-                return tcp_close_client_connection(con_state, pcb, err);
+                return tcpCloseClientConnection(con_state, pcb, err);
             }
 
             // Send the body to the client
@@ -213,7 +213,7 @@ err_t TcpServerCallback::tcp_server_recv(void *arg, tcp_pcb *pcb, pbuf *p, err_t
                 if (err != ERR_OK)
                 {
                     // printf("failed to write result data %d\n", err);
-                    return tcp_close_client_connection(con_state, pcb, err);
+                    return tcpCloseClientConnection(con_state, pcb, err);
                 }
             }
         }
@@ -223,7 +223,7 @@ err_t TcpServerCallback::tcp_server_recv(void *arg, tcp_pcb *pcb, pbuf *p, err_t
     return ERR_OK;
 }
 
-int TcpServerCallback::test_server_content(const char *request, const char *params, char *result, size_t max_result_len)
+int TcpServerCallback::testServerContent(const char *request, const char *params, char *result, size_t max_result_len)
 {
     int len = 0;
     if (strncmp(request, LED_TEST, sizeof(LED_TEST) - 1) == 0)
@@ -264,7 +264,7 @@ int TcpServerCallback::test_server_content(const char *request, const char *para
     return len;
 }
 
-err_t TcpServerCallback::tcp_close_client_connection(TcpConnectState *con_state, tcp_pcb *client_pcb, err_t close_err)
+err_t TcpServerCallback::tcpCloseClientConnection(TcpConnectState *con_state, tcp_pcb *client_pcb, err_t close_err)
 {
     if (client_pcb)
     {

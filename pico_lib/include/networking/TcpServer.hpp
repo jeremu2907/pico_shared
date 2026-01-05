@@ -33,14 +33,14 @@ namespace Networking
     class TcpServerCallback
     {
     public:
-        static void tcp_server_err(void *arg, err_t err);
-        static void tcp_server_close(TcpServer *state);
-        static bool tcp_server_open(void *arg, const char *ap_name);
-        static err_t tcp_server_poll(void *arg, struct tcp_pcb *pcb);
-        static err_t tcp_server_sent(void *arg, struct tcp_pcb *pcb, u16_t len);
-        static err_t tcp_server_accept(void *arg, struct tcp_pcb *client_pcb, err_t err);
-        static err_t tcp_server_recv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err);
-        static int test_server_content(const char *request, const char *params, char *result, size_t max_result_len);
-        static err_t tcp_close_client_connection(TcpConnectState *con_state, struct tcp_pcb *client_pcb, err_t close_err);
+        static void tcpServerErr(void *arg, err_t err);
+        static void tcpServerClose(TcpServer *state);
+        static bool tcpServerOpen(void *arg, const char *ap_name);
+        static err_t tcpServerPoll(void *arg, struct tcp_pcb *pcb);
+        static err_t tcpServerSent(void *arg, struct tcp_pcb *pcb, u16_t len);
+        static err_t tcpServerAccept(void *arg, struct tcp_pcb *client_pcb, err_t err);
+        static err_t tcpServerRecv(void *arg, struct tcp_pcb *pcb, struct pbuf *p, err_t err);
+        static int testServerContent(const char *request, const char *params, char *result, size_t max_result_len);
+        static err_t tcpCloseClientConnection(TcpConnectState *con_state, struct tcp_pcb *client_pcb, err_t close_err);
     };
 }

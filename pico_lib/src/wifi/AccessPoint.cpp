@@ -33,10 +33,10 @@ AccessPoint::AccessPoint(std::string ssid, std::string password)
     dns_server = (Networking::DnsServer *)calloc(1, sizeof(Networking::DnsServer));
     dhcp_server = (Networking::DhcpServer *)calloc(1, sizeof(Networking::DhcpServer));
 
-    Networking::DnsServer::dns_server_init(dns_server, &state->gw);
-    Networking::DhcpServer::dhcp_server_init(dhcp_server, &state->gw, &mask);
+    Networking::DnsServer::dnsServerInit(dns_server, &state->gw);
+    Networking::DhcpServer::dhcpServerInit(dhcp_server, &state->gw, &mask);
 
-    if (!Networking::TcpServerCallback::tcp_server_open(state, ssid.c_str()))
+    if (!Networking::TcpServerCallback::tcpServerOpen(state, ssid.c_str()))
     {
         ERR_START
         printf("failed to open server\n");
@@ -48,9 +48,9 @@ AccessPoint::AccessPoint(std::string ssid, std::string password)
 
 AccessPoint::~AccessPoint()
 {
-    Networking::TcpServerCallback::tcp_server_close(state);
-    Networking::DhcpServer::dhcp_server_deinit(dhcp_server);
-    Networking::DnsServer::dns_server_deinit(dns_server);
+    Networking::TcpServerCallback::tcpServerClose(state);
+    Networking::DhcpServer::dhcpServerDeinit(dhcp_server);
+    Networking::DnsServer::dnsServerDeinit(dns_server);
 
     free(state);
     free(dns_server);
