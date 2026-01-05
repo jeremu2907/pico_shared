@@ -1,8 +1,8 @@
-#include "wifi/TcpServer.hpp"
+#include "networking/TcpServer.hpp"
 
 #include "wifi/AccessPoint.hpp"
 
-using namespace Wifi;
+using namespace Networking;
 
 #define TCP_PORT 80
 #define POLL_TIME_S 1
@@ -119,7 +119,7 @@ err_t TcpServerCallback::tcp_server_accept(void *arg, tcp_pcb *client_pcb, err_t
     tcp_poll(client_pcb, tcp_server_poll, POLL_TIME_S * 2);
     tcp_err(client_pcb, tcp_server_err);
 
-    AccessPoint::onTcpAccept();
+    Wifi::AccessPoint::onTcpAccept();
 
     return ERR_OK;
 }

@@ -5,20 +5,23 @@
 
 #include <pico/stdlib.h>
 
-typedef struct dns_server_t_ dns_server_t;
-
-namespace Wifi
+namespace Networking
 {
     struct TcpServer;
+    struct DnsServer;
     struct DhcpServer;
 
     class TcpServerCallback;
+    class DnsServerCallback;
     class DhcpServerCallback;
+}
 
+namespace Wifi
+{
     class AccessPoint
     {
-        friend class TcpServerCallback;
-        friend class DhcpServerCallback;
+        friend class Networking::TcpServerCallback;
+        friend class Networking::DhcpServerCallback;
 
     public:
         explicit AccessPoint(std::string ssid, std::string password);
@@ -49,9 +52,9 @@ namespace Wifi
         std::string ssid;
         std::string password;
 
-        TcpServer *state = nullptr;
-        DhcpServer *dhcp_server = nullptr;
-        dns_server_t *dns_server = nullptr;
+        Networking::TcpServer *state = nullptr;
+        Networking::DnsServer *dns_server = nullptr;
+        Networking::DhcpServer *dhcp_server = nullptr;
 
         inline static uint m_sDhcpLeaseTimeS = 24 * 60 * 60;
         inline static std::function<void()> m_sCallbackOnTcpAccept = []() {};

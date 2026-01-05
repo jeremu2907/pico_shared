@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Pico Shared: wifi/TcpServer.hpp Source File</title>
+<title>Pico Shared: networking/TcpServer.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -103,10 +103,10 @@ $(function(){initNavTree('TcpServer_8hpp_source.html','',''); });
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;lwip/pbuf.h&quot;</span></div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &quot;lwip/tcp.h&quot;</span></div>
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span>Wifi</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span>Networking</div>
 <div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>{</div>
 <div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="structWifi_1_1TcpServer.html">   15</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structWifi_1_1TcpServer.html">TcpServer</a></div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="structNetworking_1_1TcpServer.html">   15</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structNetworking_1_1TcpServer.html">TcpServer</a></div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    {</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        <span class="keyword">struct </span>tcp_pcb *server_pcb;</div>
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>        <span class="keywordtype">bool</span> complete;</div>
@@ -115,7 +115,7 @@ $(function(){initNavTree('TcpServer_8hpp_source.html','',''); });
 </div>
 <div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
 <div class="foldopen" id="foldopen00022" data-start="{" data-end="};">
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structWifi_1_1TcpConnectState.html">   22</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structWifi_1_1TcpConnectState.html">TcpConnectState</a></div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno"><a class="line" href="structNetworking_1_1TcpConnectState.html">   22</a></span>    <span class="keyword">struct </span><a class="code hl_struct" href="structNetworking_1_1TcpConnectState.html">TcpConnectState</a></div>
 <div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    {</div>
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>        <span class="keyword">struct </span>tcp_pcb *pcb;</div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>        <span class="keywordtype">int</span> sent_len;</div>
@@ -128,31 +128,31 @@ $(function(){initNavTree('TcpServer_8hpp_source.html','',''); });
 </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
 <div class="foldopen" id="foldopen00033" data-start="{" data-end="};">
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classWifi_1_1TcpServerCallback.html">   33</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classWifi_1_1TcpServerCallback.html">TcpServerCallback</a></div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno"><a class="line" href="classNetworking_1_1TcpServerCallback.html">   33</a></span>    <span class="keyword">class </span><a class="code hl_class" href="classNetworking_1_1TcpServerCallback.html">TcpServerCallback</a></div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    {</div>
 <div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keyword">public</span>:</div>
 <div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> tcp_server_err(<span class="keywordtype">void</span> *arg, err_t err);</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> tcp_server_close(<a class="code hl_struct" href="structWifi_1_1TcpServer.html">TcpServer</a> *state);</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>        <span class="keyword">static</span> <span class="keywordtype">void</span> tcp_server_close(<a class="code hl_struct" href="structNetworking_1_1TcpServer.html">TcpServer</a> *state);</div>
 <div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>        <span class="keyword">static</span> <span class="keywordtype">bool</span> tcp_server_open(<span class="keywordtype">void</span> *arg, <span class="keyword">const</span> <span class="keywordtype">char</span> *ap_name);</div>
 <div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>        <span class="keyword">static</span> err_t tcp_server_poll(<span class="keywordtype">void</span> *arg, <span class="keyword">struct</span> tcp_pcb *pcb);</div>
 <div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>        <span class="keyword">static</span> err_t tcp_server_sent(<span class="keywordtype">void</span> *arg, <span class="keyword">struct</span> tcp_pcb *pcb, u16_t len);</div>
 <div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>        <span class="keyword">static</span> err_t tcp_server_accept(<span class="keywordtype">void</span> *arg, <span class="keyword">struct</span> tcp_pcb *client_pcb, err_t err);</div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>        <span class="keyword">static</span> err_t tcp_server_recv(<span class="keywordtype">void</span> *arg, <span class="keyword">struct</span> tcp_pcb *pcb, <span class="keyword">struct</span> pbuf *p, err_t err);</div>
 <div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>        <span class="keyword">static</span> <span class="keywordtype">int</span> test_server_content(<span class="keyword">const</span> <span class="keywordtype">char</span> *request, <span class="keyword">const</span> <span class="keywordtype">char</span> *params, <span class="keywordtype">char</span> *result, <span class="keywordtype">size_t</span> max_result_len);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keyword">static</span> err_t tcp_close_client_connection(<a class="code hl_struct" href="structWifi_1_1TcpConnectState.html">TcpConnectState</a> *con_state, <span class="keyword">struct</span> tcp_pcb *client_pcb, err_t close_err);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>        <span class="keyword">static</span> err_t tcp_close_client_connection(<a class="code hl_struct" href="structNetworking_1_1TcpConnectState.html">TcpConnectState</a> *con_state, <span class="keyword">struct</span> tcp_pcb *client_pcb, err_t close_err);</div>
 <div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    };</div>
 </div>
 <div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>}</div>
-<div class="ttc" id="aclassWifi_1_1TcpServerCallback_html"><div class="ttname"><a href="classWifi_1_1TcpServerCallback.html">Wifi::TcpServerCallback</a></div><div class="ttdef"><b>Definition</b> TcpServer.hpp:34</div></div>
-<div class="ttc" id="astructWifi_1_1TcpConnectState_html"><div class="ttname"><a href="structWifi_1_1TcpConnectState.html">Wifi::TcpConnectState</a></div><div class="ttdef"><b>Definition</b> TcpServer.hpp:23</div></div>
-<div class="ttc" id="astructWifi_1_1TcpServer_html"><div class="ttname"><a href="structWifi_1_1TcpServer.html">Wifi::TcpServer</a></div><div class="ttdef"><b>Definition</b> TcpServer.hpp:16</div></div>
+<div class="ttc" id="aclassNetworking_1_1TcpServerCallback_html"><div class="ttname"><a href="classNetworking_1_1TcpServerCallback.html">Networking::TcpServerCallback</a></div><div class="ttdef"><b>Definition</b> TcpServer.hpp:34</div></div>
+<div class="ttc" id="astructNetworking_1_1TcpConnectState_html"><div class="ttname"><a href="structNetworking_1_1TcpConnectState.html">Networking::TcpConnectState</a></div><div class="ttdef"><b>Definition</b> TcpServer.hpp:23</div></div>
+<div class="ttc" id="astructNetworking_1_1TcpServer_html"><div class="ttname"><a href="structNetworking_1_1TcpServer.html">Networking::TcpServer</a></div><div class="ttdef"><b>Definition</b> TcpServer.hpp:16</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>wifi</b></li><li class="navelem"><b>TcpServer.hpp</b></li>
+    <li class="navelem"><b>networking</b></li><li class="navelem"><b>TcpServer.hpp</b></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

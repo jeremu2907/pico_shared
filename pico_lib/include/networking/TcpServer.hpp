@@ -10,7 +10,7 @@
 #include "lwip/pbuf.h"
 #include "lwip/tcp.h"
 
-namespace Wifi
+namespace Networking
 {
     struct TcpServer
     {

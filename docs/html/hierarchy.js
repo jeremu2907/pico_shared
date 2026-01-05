@@ -10,11 +10,14 @@ var hierarchy =
     [ "I2c::Base", "classI2c_1_1Base.html", [
       [ "I2c::Ssd1306", "classI2c_1_1Ssd1306.html", null ]
     ] ],
-    [ "Wifi::DhcpServer", "structWifi_1_1DhcpServer.html", null ],
-    [ "Wifi::DhcpServerCallback", "classWifi_1_1DhcpServerCallback.html", null ],
-    [ "Wifi::DhcpServerLease", "structWifi_1_1DhcpServerLease.html", null ],
+    [ "Networking::DhcpServer", "structNetworking_1_1DhcpServer.html", null ],
+    [ "Networking::DhcpServerCallback", "classNetworking_1_1DhcpServerCallback.html", null ],
+    [ "Networking::DhcpServerLease", "structNetworking_1_1DhcpServerLease.html", null ],
+    [ "Networking::DnsHeader", "structNetworking_1_1DnsHeader.html", null ],
+    [ "Networking::DnsServer", "structNetworking_1_1DnsServer.html", null ],
+    [ "Networking::DnsServerCallback", "classNetworking_1_1DnsServerCallback.html", null ],
     [ "Font8x8", "classFont8x8.html", null ],
-    [ "Wifi::TcpConnectState", "structWifi_1_1TcpConnectState.html", null ],
-    [ "Wifi::TcpServer", "structWifi_1_1TcpServer.html", null ],
-    [ "Wifi::TcpServerCallback", "classWifi_1_1TcpServerCallback.html", null ]
+    [ "Networking::TcpConnectState", "structNetworking_1_1TcpConnectState.html", null ],
+    [ "Networking::TcpServer", "structNetworking_1_1TcpServer.html", null ],
+    [ "Networking::TcpServerCallback", "classNetworking_1_1TcpServerCallback.html", null ]
 ];

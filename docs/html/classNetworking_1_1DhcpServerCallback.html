@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Pico Shared: Member List</title>
+<title>Pico Shared: Networking::DhcpServerCallback Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('classWifi_1_1AccessPoint.html','',''); });
+$(function(){initNavTree('classNetworking_1_1DhcpServerCallback.html','','classNetworking_1_1DhcpServerCallback-members'); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -88,26 +88,38 @@ $(function(){initNavTree('classWifi_1_1AccessPoint.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Wifi::AccessPoint Member List</div></div>
+  <div class="headertitle"><div class="title">Networking::DhcpServerCallback Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
-
-<p>This is the complete list of members for <a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a>, including all inherited members.</p>
-<table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>AccessPoint</b>(std::string ssid, std::string password) (defined in <a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a>)</td><td class="entry"><a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a></td><td class="entry"><span class="mlabel">explicit</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>installCallbackOnDhcpConnect</b>(Func f) (defined in <a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a>)</td><td class="entry"><a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>installCallbackOnTcpAccept</b>(Func f) (defined in <a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a>)</td><td class="entry"><a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>Networking::DhcpServerCallback</b> (defined in <a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a>)</td><td class="entry"><a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>Networking::TcpServerCallback</b> (defined in <a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a>)</td><td class="entry"><a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>runLoop</b>() (defined in <a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a>)</td><td class="entry"><a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>setDhcpLeaseTimeS</b>(uint seconds) (defined in <a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a>)</td><td class="entry"><a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>~AccessPoint</b>() (defined in <a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a>)</td><td class="entry"><a class="el" href="classWifi_1_1AccessPoint.html">Wifi::AccessPoint</a></td><td class="entry"></td></tr>
-</table></div><!-- contents -->
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:aea0eb35b57ac945034eab50a0183a8ff" id="r_aea0eb35b57ac945034eab50a0183a8ff"><td class="memItemLeft" align="right" valign="top"><a id="aea0eb35b57ac945034eab50a0183a8ff" name="aea0eb35b57ac945034eab50a0183a8ff"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>dhcp_socket_free</b> (struct udp_pcb **udp)</td></tr>
+<tr class="memitem:ad25b0cae582acb0db0f8019d6e492c3b" id="r_ad25b0cae582acb0db0f8019d6e492c3b"><td class="memItemLeft" align="right" valign="top"><a id="ad25b0cae582acb0db0f8019d6e492c3b" name="ad25b0cae582acb0db0f8019d6e492c3b"></a>
+static int&#160;</td><td class="memItemRight" valign="bottom"><b>dhcp_socket_bind</b> (struct udp_pcb **udp, uint16_t port)</td></tr>
+<tr class="memitem:a09dc7355c1f1292e535c240e9c19821e" id="r_a09dc7355c1f1292e535c240e9c19821e"><td class="memItemLeft" align="right" valign="top"><a id="a09dc7355c1f1292e535c240e9c19821e" name="a09dc7355c1f1292e535c240e9c19821e"></a>
+static int&#160;</td><td class="memItemRight" valign="bottom"><b>dhcp_socket_new_dgram</b> (struct udp_pcb **udp, void *cb_data, udp_recv_fn cb_udp_recv)</td></tr>
+<tr class="memitem:ac9cbb514ab510031f82ee784732a8549" id="r_ac9cbb514ab510031f82ee784732a8549"><td class="memItemLeft" align="right" valign="top"><a id="ac9cbb514ab510031f82ee784732a8549" name="ac9cbb514ab510031f82ee784732a8549"></a>
+static void&#160;</td><td class="memItemRight" valign="bottom"><b>dhcp_server_process</b> (void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *src_addr, u16_t src_port)</td></tr>
+</table>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>networking/<a class="el" href="DhcpServer_8hpp_source.html">DhcpServer.hpp</a></li>
+</ul>
+</div><!-- contents -->
 </div><!-- doc-content -->
+<div id="page-nav" class="page-nav-panel">
+<div id="page-nav-resize-handle"></div>
+<div id="page-nav-tree">
+<div id="page-nav-contents">
+</div><!-- page-nav-contents -->
+</div><!-- page-nav-tree -->
+</div><!-- page-nav -->
 </div><!-- container -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><b>Networking</b></li><li class="navelem"><a href="classNetworking_1_1DhcpServerCallback.html">DhcpServerCallback</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

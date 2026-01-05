@@ -2,14 +2,13 @@
 #include <string.h>
 #include <errno.h>
 
-#include "cyw43_config.h"
-#include "lwip/udp.h"
+#include "networking/DhcpServer.hpp"
 
-#include "wifi/DhcpServer.hpp"
+#include "cyw43_config.h"
 
 #include "wifi/AccessPoint.hpp"
 
-using namespace Wifi;
+using namespace Networking;
 
 #define DHCPDISCOVER (1)
 #define DHCPOFFER (2)
@@ -38,7 +37,7 @@ using namespace Wifi;
 #define PORT_DHCP_SERVER (67)
 #define PORT_DHCP_CLIENT (68)
 
-#define DEFAULT_LEASE_TIME_S AccessPoint::getDhcpLeaseTimeS()
+#define DEFAULT_LEASE_TIME_S Wifi::AccessPoint::getDhcpLeaseTimeS()
 
 #define MAC_LEN (6)
 #define MAKE_IP4(a, b, c, d) ((a) << 24 | (b) << 16 | (c) << 8 | (d))
@@ -298,7 +297,7 @@ void DhcpServerCallback::dhcp_server_process(void *arg, struct udp_pcb *upcb, st
                dhcp_msg.chaddr[0], dhcp_msg.chaddr[1], dhcp_msg.chaddr[2], dhcp_msg.chaddr[3], dhcp_msg.chaddr[4], dhcp_msg.chaddr[5],
                dhcp_msg.yiaddr[0], dhcp_msg.yiaddr[1], dhcp_msg.yiaddr[2], dhcp_msg.yiaddr[3]);
 
-        AccessPoint::onDhcpClientConnect();
+        Wifi::AccessPoint::onDhcpClientConnect();
 
         break;
     }

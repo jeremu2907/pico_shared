@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['tcpconnectstate_0',['TcpConnectState',['../structWifi_1_1TcpConnectState.html',1,'Wifi']]],
-  ['tcpserver_1',['TcpServer',['../structWifi_1_1TcpServer.html',1,'Wifi']]],
-  ['tcpservercallback_2',['TcpServerCallback',['../classWifi_1_1TcpServerCallback.html',1,'Wifi']]]
+  ['tcpconnectstate_0',['TcpConnectState',['../structNetworking_1_1TcpConnectState.html',1,'Networking']]],
+  ['tcpserver_1',['TcpServer',['../structNetworking_1_1TcpServer.html',1,'Networking']]],
+  ['tcpservercallback_2',['TcpServerCallback',['../classNetworking_1_1TcpServerCallback.html',1,'Networking']]]
 ];

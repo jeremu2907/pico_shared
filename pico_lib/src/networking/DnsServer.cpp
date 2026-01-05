@@ -1,33 +1,18 @@
-/**
- * Copyright (c) 2022 Raspberry Pi (Trading) Ltd.
- *
- * SPDX-License-Identifier: BSD-3-Clause
- */
-
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
 #include <assert.h>
 #include <stdbool.h>
 
-#include "wifi/dnsserver.h"
-#include "lwip/udp.h"
+#include "networking/DnsServer.hpp"
 
 #define PORT_DNS_SERVER 53
 #define DUMP_DATA 0
-
-typedef struct dns_header_t_ {
-    uint16_t id;
-    uint16_t flags;
-    uint16_t question_count;
-    uint16_t answer_record_count;
-    uint16_t authority_record_count;
-    uint16_t additional_record_count;
-} dns_header_t;
-
 #define MAX_DNS_MSG_SIZE 300
 
-static int dns_socket_new_dgram(struct udp_pcb **udp, void *cb_data, udp_recv_fn cb_udp_recv) {
+using namespace Networking;
+
+int DnsServerCallback::dns_socket_new_dgram(struct udp_pcb **udp, void *cb_data, udp_recv_fn cb_udp_recv) {
     *udp = udp_new();
     if (*udp == NULL) {
         return -ENOMEM;
@@ -36,14 +21,14 @@ static int dns_socket_new_dgram(struct udp_pcb **udp, void *cb_data, udp_recv_fn
     return ERR_OK;
 }
 
-static void dns_socket_free(struct udp_pcb **udp) {
+void DnsServerCallback::dns_socket_free(struct udp_pcb **udp) {
     if (*udp != NULL) {
         udp_remove(*udp);
         *udp = NULL;
     }
 }
 
-static int dns_socket_bind(struct udp_pcb **udp, uint32_t ip, uint16_t port) {
+int DnsServerCallback::dns_socket_bind(struct udp_pcb **udp, uint32_t ip, uint16_t port) {
     ip_addr_t addr;
     IP4_ADDR(&addr, ip >> 24 & 0xff, ip >> 16 & 0xff, ip >> 8 & 0xff, ip & 0xff);
     err_t err = udp_bind(*udp, &addr, port);
@@ -55,7 +40,7 @@ static int dns_socket_bind(struct udp_pcb **udp, uint32_t ip, uint16_t port) {
 }
 
 #if DUMP_DATA
-static void dump_bytes(const uint8_t *bptr, uint32_t len) {
+void DnsServerCallback::dump_bytes(const uint8_t *bptr, uint32_t len) {
     unsigned int i = 0;
 
     for (i = 0; i < len;) {
@@ -70,7 +55,7 @@ static void dump_bytes(const uint8_t *bptr, uint32_t len) {
 }
 #endif
 
-static int dns_socket_sendto(struct udp_pcb **udp, const void *buf, size_t len, const ip_addr_t *dest, uint16_t port) {
+int DnsServerCallback::dns_socket_sendto(struct udp_pcb **udp, const void *buf, size_t len, const ip_addr_t *dest, uint16_t port) {
     if (len > 0xffff) {
         len = 0xffff;
     }
@@ -97,16 +82,16 @@ static int dns_socket_sendto(struct udp_pcb **udp, const void *buf, size_t len, 
     return len;
 }
 
-static void dns_server_process(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *src_addr, u16_t src_port) {
-    dns_server_t *d = arg;
+void DnsServerCallback::dns_server_process(void *arg, struct udp_pcb *upcb, struct pbuf *p, const ip_addr_t *src_addr, u16_t src_port) {
+    DnsServer *d = (DnsServer *)arg;
     //printf("dns_server_process %u\n", p->tot_len);
 
     uint8_t dns_msg[MAX_DNS_MSG_SIZE];
-    dns_header_t *dns_hdr = (dns_header_t*)dns_msg;
+    DnsHeader *dns_hdr = (DnsHeader*)dns_msg;
 
     size_t msg_len = pbuf_copy_partial(p, dns_msg, sizeof(dns_msg), 0);
-    if (msg_len < sizeof(dns_header_t)) {
-        goto ignore_request;
+    if (msg_len < sizeof(DnsHeader)) {
+        pbuf_free(p);
     }
 
 #if DUMP_DATA
@@ -128,24 +113,24 @@ static void dns_server_process(void *arg, struct udp_pcb *upcb, struct pbuf *p, 
     // Check QR indicates a query
     if (((flags >> 15) & 0x1) != 0) {
         //printf("Ignoring non-query\n");
-        goto ignore_request;
+        pbuf_free(p);
     }
 
     // Check for standard query
     if (((flags >> 11) & 0xf) != 0) {
         //printf("Ignoring non-standard query\n");
-        goto ignore_request;
+        pbuf_free(p);
     }
 
     // Check question count
     if (question_count < 1) {
         //printf("Invalid question count\n");
-        goto ignore_request;
+        pbuf_free(p);
     }
 
     // //print the question
     //printf("question: ");
-    const uint8_t *question_ptr_start = dns_msg + sizeof(dns_header_t);
+    const uint8_t *question_ptr_start = dns_msg + sizeof(DnsHeader);
     const uint8_t *question_ptr_end = dns_msg + msg_len;
     const uint8_t *question_ptr = question_ptr_start;
     while(question_ptr < question_ptr_end) {
@@ -159,7 +144,7 @@ static void dns_server_process(void *arg, struct udp_pcb *upcb, struct pbuf *p, 
             int label_len = *question_ptr++;
             if (label_len > 63) {
                 //printf("Invalid label\n");
-                goto ignore_request;
+                pbuf_free(p);
             }
             //printf("%.*s", label_len, question_ptr);
             question_ptr += label_len;
@@ -170,7 +155,7 @@ static void dns_server_process(void *arg, struct udp_pcb *upcb, struct pbuf *p, 
     // Check question length
     if (question_ptr - question_ptr_start > 255) {
         //printf("Invalid question length\n");
-        goto ignore_request;
+        pbuf_free(p);
     }
 
     // Skip QNAME and QTYPE
@@ -209,17 +194,14 @@ static void dns_server_process(void *arg, struct udp_pcb *upcb, struct pbuf *p, 
     // Send the reply
     //printf("Sending %d byte reply to %s:%d\n", answer_ptr - dns_msg, ipaddr_ntoa(src_addr), src_port);
     dns_socket_sendto(&d->udp, &dns_msg, answer_ptr - dns_msg, src_addr, src_port);
-
-ignore_request:
-    pbuf_free(p);
 }
 
-void dns_server_init(dns_server_t *d, ip_addr_t *ip) {
-    if (dns_socket_new_dgram(&d->udp, d, dns_server_process) != ERR_OK) {
+void DnsServer::dns_server_init(DnsServer *d, ip_addr_t *ip) {
+    if (DnsServerCallback::dns_socket_new_dgram(&d->udp, d, DnsServerCallback::dns_server_process) != ERR_OK) {
         //printf("dns server failed to start\n");
         return;
     }
-    if (dns_socket_bind(&d->udp, 0, PORT_DNS_SERVER) != ERR_OK) {
+    if (DnsServerCallback::dns_socket_bind(&d->udp, 0, PORT_DNS_SERVER) != ERR_OK) {
         //printf("dns server failed to bind\n");
         return;
     }
@@ -227,6 +209,6 @@ void dns_server_init(dns_server_t *d, ip_addr_t *ip) {
     //printf("dns server listening on port %d\n", PORT_DNS_SERVER);
 }
 
-void dns_server_deinit(dns_server_t *d) {
-    dns_socket_free(&d->udp);
+void DnsServer::dns_server_deinit(DnsServer *d) {
+    DnsServerCallback::dns_socket_free(&d->udp);
 }

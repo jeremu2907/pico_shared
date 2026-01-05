@@ -1,12 +1,13 @@
 #pragma once
 
 #include "lwipopts.h"
+#include "lwip/udp.h"
 #include "lwip/ip_addr.h"
 
 #define DHCPS_BASE_IP (16)
 #define DHCPS_MAX_IP (8)
 
-namespace Wifi
+namespace Networking
 {
     struct DhcpServerLease
     {

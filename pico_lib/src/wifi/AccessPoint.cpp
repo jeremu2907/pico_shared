@@ -1,20 +1,14 @@
 #include "wifi/AccessPoint.hpp"
-#include "wifi/TcpServer.hpp"
-#include "wifi/DhcpServer.hpp"
+#include "networking/TcpServer.hpp"
+#include "networking/DnsServer.hpp"
+#include "networking/DhcpServer.hpp"
 #include "Macros.hpp"
-
-extern "C"
-{
-// #include "wifi/tcpserver.h"
-#include "wifi/dnsserver.h"
-// #include "wifi/dhcpserver.h"
-}
 
 using namespace Wifi;
 
 AccessPoint::AccessPoint(std::string ssid, std::string password)
 {
-    state = (TcpServer *)calloc(1, sizeof(TcpServer));
+    state = (Networking::TcpServer *)calloc(1, sizeof(Networking::TcpServer));
     if (!state)
     {
         ERR_START
@@ -36,13 +30,13 @@ AccessPoint::AccessPoint(std::string ssid, std::string password)
 
 #undef IP
 
-    dhcp_server = (DhcpServer *)calloc(1, sizeof(DhcpServer));
-    dns_server = (dns_server_t *)calloc(1, sizeof(dns_server_t));
+    dns_server = (Networking::DnsServer *)calloc(1, sizeof(Networking::DnsServer));
+    dhcp_server = (Networking::DhcpServer *)calloc(1, sizeof(Networking::DhcpServer));
 
-    DhcpServer::dhcp_server_init(dhcp_server, &state->gw, &mask);
-    dns_server_init(dns_server, &state->gw);
+    Networking::DnsServer::dns_server_init(dns_server, &state->gw);
+    Networking::DhcpServer::dhcp_server_init(dhcp_server, &state->gw, &mask);
 
-    if (!TcpServerCallback::tcp_server_open(state, ssid.c_str()))
+    if (!Networking::TcpServerCallback::tcp_server_open(state, ssid.c_str()))
     {
         ERR_START
         printf("failed to open server\n");
@@ -54,9 +48,9 @@ AccessPoint::AccessPoint(std::string ssid, std::string password)
 
 AccessPoint::~AccessPoint()
 {
-    TcpServerCallback::tcp_server_close(state);
-    DhcpServer::dhcp_server_deinit(dhcp_server);
-    dns_server_deinit(dns_server);
+    Networking::TcpServerCallback::tcp_server_close(state);
+    Networking::DhcpServer::dhcp_server_deinit(dhcp_server);
+    Networking::DnsServer::dns_server_deinit(dns_server);
 
     free(state);
     free(dns_server);
