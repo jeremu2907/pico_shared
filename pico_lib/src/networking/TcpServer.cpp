@@ -266,6 +266,7 @@ int TcpServerCallback::testServerContent(const char *request, const char *params
 
 err_t TcpServerCallback::tcpCloseClientConnection(TcpConnectState *con_state, tcp_pcb *client_pcb, err_t close_err)
 {
+    printf("################### Closing connection...\n");
     if (client_pcb)
     {
         assert(con_state && con_state->pcb == client_pcb);

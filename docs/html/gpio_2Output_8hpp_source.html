@@ -100,21 +100,26 @@ $(function(){initNavTree('gpio_2Output_8hpp_source.html','',''); });
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="keyword">namespace </span>Gpio</div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
 <div class="foldopen" id="foldopen00009" data-start="{" data-end="};">
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classGpio_1_1Output.html">    9</a></span>    <span class="keyword">class </span>Output : <span class="keyword">public</span> Base</div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno"><a class="line" href="classGpio_1_1Output.html">    9</a></span>    <span class="keyword">class </span>Output : <span class="keyword">public</span> <a class="code hl_function" href="classGpio_1_1Base.html#a146d7eff7200c1358df9ca9c7054ee8b">Base</a></div>
 <div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    {</div>
 <div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    <span class="keyword">public</span>:</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>        <span class="keyword">explicit</span> Output(uint gpio);</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>        <span class="keyword">explicit</span> Output(uint <a class="code hl_function" href="classGpio_1_1Base.html#a0e64e86759ec18aebdc3d75add8d0270">gpio</a>);</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>        ~Output() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>        <span class="keywordtype">void</span> setHigh();</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="keywordtype">void</span> setLow();</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <span class="keyword">private</span>:</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>        <span class="keywordtype">void</span> init() <span class="keyword">override</span>;</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>        <span class="keywordtype">void</span> put(<span class="keywordtype">bool</span> high);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    };</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="classGpio_1_1Output.html#a30f801306fd676a2044b81542d86ecb3">   16</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classGpio_1_1Output.html#a30f801306fd676a2044b81542d86ecb3">setHigh</a>();</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span></div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno"><a class="line" href="classGpio_1_1Output.html#a8c0e598703d289261639ab6feb3d0f2f">   19</a></span>        <span class="keywordtype">void</span> <a class="code hl_function" href="classGpio_1_1Output.html#a8c0e598703d289261639ab6feb3d0f2f">setLow</a>();</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">private</span>:</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>        <span class="keywordtype">void</span> init() <span class="keyword">override</span>;</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>        <span class="keywordtype">void</span> put(<span class="keywordtype">bool</span> high);</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span>    };</div>
 </div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>}</div>
+<div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span>}</div>
+<div class="ttc" id="aclassGpio_1_1Base_html_a0e64e86759ec18aebdc3d75add8d0270"><div class="ttname"><a href="classGpio_1_1Base.html#a0e64e86759ec18aebdc3d75add8d0270">Gpio::Base::gpio</a></div><div class="ttdeci">uint gpio() const</div></div>
+<div class="ttc" id="aclassGpio_1_1Base_html_a146d7eff7200c1358df9ca9c7054ee8b"><div class="ttname"><a href="classGpio_1_1Base.html#a146d7eff7200c1358df9ca9c7054ee8b">Gpio::Base::Base</a></div><div class="ttdeci">Base(uint gpio)</div></div>
+<div class="ttc" id="aclassGpio_1_1Output_html_a30f801306fd676a2044b81542d86ecb3"><div class="ttname"><a href="classGpio_1_1Output.html#a30f801306fd676a2044b81542d86ecb3">Gpio::Output::setHigh</a></div><div class="ttdeci">void setHigh()</div><div class="ttdoc">Sets gpio voltage level High.</div></div>
+<div class="ttc" id="aclassGpio_1_1Output_html_a8c0e598703d289261639ab6feb3d0f2f"><div class="ttname"><a href="classGpio_1_1Output.html#a8c0e598703d289261639ab6feb3d0f2f">Gpio::Output::setLow</a></div><div class="ttdeci">void setLow()</div><div class="ttdoc">Sets gpio voltage level Low.</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

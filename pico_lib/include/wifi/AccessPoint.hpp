@@ -24,19 +24,31 @@ namespace Wifi
         friend class Networking::DhcpServerCallback;
 
     public:
+        /// @brief 
+        /// @param ssid 
+        /// @param password 
         explicit AccessPoint(std::string ssid, std::string password);
         ~AccessPoint();
 
+        /// @brief 
         void runLoop();
         
+        /// @brief 
+        /// @param seconds 
         void setDhcpLeaseTimeS(uint seconds);
 
+        /// @brief 
+        /// @tparam Func 
+        /// @param f 
         template <typename Func>
         static void installCallbackOnTcpAccept(Func f)
         {
             m_sCallbackOnTcpAccept = f;
         }
 
+        /// @brief 
+        /// @tparam Func 
+        /// @param f 
         template <typename Func>
         static void installCallbackOnDhcpConnect(Func f)
         {
@@ -56,8 +68,8 @@ namespace Wifi
         Networking::DnsServer *dns_server = nullptr;
         Networking::DhcpServer *dhcp_server = nullptr;
 
-        inline static uint m_sDhcpLeaseTimeS = 24 * 60 * 60;
-        inline static std::function<void()> m_sCallbackOnTcpAccept = []() {};
-        inline static std::function<void()> m_sCallbackOnDhcpConnect = []() {};
+        inline static uint m_sDhcpLeaseTimeS = 60 * 60;
+        inline static std::function<void()> m_sCallbackOnTcpAccept;
+        inline static std::function<void()> m_sCallbackOnDhcpConnect;
     };
 }

@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['setdata_0',['setData',['../classI2c_1_1Ssd1306.html#afda607bcdc3bb773618824203603149b',1,'I2c::Ssd1306']]],
-  ['ssd1306_1',['Ssd1306',['../classI2c_1_1Ssd1306.html',1,'I2c']]]
+  ['output_0',['Output',['../classGpio_1_1Output.html',1,'Gpio::Output'],['../classPwm_1_1Output.html',1,'Pwm::Output'],['../classPwm_1_1Output.html#a0ec76180ab60c9dfd064225578bf5e21',1,'Pwm::Output::Output()']]]
 ];

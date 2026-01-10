@@ -16,9 +16,12 @@ namespace Adc
         inline static bool m_sRunning = true;
 
     public:
+        /// @brief 
+        /// @param gpio 
         explicit Input(uint gpio);
         ~Input();
 
+        /// @brief 
         static void runLoop();
 
         /// @brief Installs callback on ADC input voltage is sampled

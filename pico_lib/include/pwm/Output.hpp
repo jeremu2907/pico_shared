@@ -7,8 +7,14 @@ namespace Pwm
     class Output : public Gpio::Base
     {
     public:
+        /// @brief 
+        /// @param gpio 
+        /// @param pwmPeriodMicroS 
+        /// @param pwmDutyPeriodMicroS 
         Output(uint gpio, uint pwmPeriodMicroS, uint pwmDutyPeriodMicroS);
 
+        /// @brief 
+        /// @param pwmDutyPeriodMicroS 
         void setPwmDutyPeriodMicroS(uint pwmDutyPeriodMicroS);
 
     private:

@@ -12,7 +12,10 @@ namespace Gpio
         explicit Output(uint gpio);
         ~Output() = default;
 
+        /// @brief Sets gpio voltage level High
         void setHigh();
+
+        /// @brief Sets gpio voltage level Low
         void setLow();
 
     private:

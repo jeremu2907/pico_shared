@@ -7,7 +7,16 @@
 class Font8x8
 {
 public:
+    /// @brief Converts string to bitmap
+    /// @param buf 
+    /// @param s 
+    /// @param startPos 
+    /// @param endPos 
     static void getBmp(uint8_t *buf, std::string s, size_t *startPos = nullptr, size_t *endPos = nullptr);
+
+    /// @brief  Converts char to bitmap
+    /// @param buf 
+    /// @param c 
     static void getBmp(uint8_t *buf, char c);
 
 private:

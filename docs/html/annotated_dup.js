@@ -4,9 +4,9 @@ var annotated_dup =
       [ "Input", "classAdc_1_1Input.html", "classAdc_1_1Input" ]
     ] ],
     [ "Gpio", null, [
-      [ "Base", "classGpio_1_1Base.html", null ],
-      [ "Input", "classGpio_1_1Input.html", null ],
-      [ "Output", "classGpio_1_1Output.html", null ]
+      [ "Base", "classGpio_1_1Base.html", "classGpio_1_1Base" ],
+      [ "Input", "classGpio_1_1Input.html", "classGpio_1_1Input" ],
+      [ "Output", "classGpio_1_1Output.html", "classGpio_1_1Output" ]
     ] ],
     [ "I2c", null, [
       [ "Base", "classI2c_1_1Base.html", "classI2c_1_1Base" ],
@@ -24,10 +24,10 @@ var annotated_dup =
       [ "TcpServerCallback", "classNetworking_1_1TcpServerCallback.html", null ]
     ] ],
     [ "Pwm", null, [
-      [ "Output", "classPwm_1_1Output.html", null ]
+      [ "Output", "classPwm_1_1Output.html", "classPwm_1_1Output" ]
     ] ],
     [ "Wifi", null, [
-      [ "AccessPoint", "classWifi_1_1AccessPoint.html", null ]
+      [ "AccessPoint", "classWifi_1_1AccessPoint.html", "classWifi_1_1AccessPoint" ]
     ] ],
     [ "Font8x8", "classFont8x8.html", null ]
 ];

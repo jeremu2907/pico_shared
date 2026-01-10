@@ -105,7 +105,7 @@ $(function(){initNavTree('Ssd1306_8h_source.html','',''); });
 <div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span>I2c</div>
 <div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
 <div class="foldopen" id="foldopen00014" data-start="{" data-end="};">
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classI2c_1_1Ssd1306.html">   14</a></span>    <span class="keyword">class </span>Ssd1306 : <span class="keyword">public</span> Base</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="classI2c_1_1Ssd1306.html">   14</a></span>    <span class="keyword">class </span>Ssd1306 : <span class="keyword">public</span> <a class="code hl_function" href="classI2c_1_1Base.html#abd80427d32de6d50c40eee8bd7008df8">Base</a></div>
 <div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    {</div>
 <div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>        <span class="keyword">enum class</span> ControlByte : uint8_t</div>
 <div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>        {</div>
@@ -186,6 +186,7 @@ $(function(){initNavTree('Ssd1306_8h_source.html','',''); });
 <div class="line"><a id="l00096" name="l00096"></a><span class="lineno">   96</span>    };</div>
 </div>
 <div class="line"><a id="l00097" name="l00097"></a><span class="lineno">   97</span>}</div>
+<div class="ttc" id="aclassI2c_1_1Base_html_abd80427d32de6d50c40eee8bd7008df8"><div class="ttname"><a href="classI2c_1_1Base.html#abd80427d32de6d50c40eee8bd7008df8">I2c::Base::Base</a></div><div class="ttdeci">Base(uint addr, uint gpioSda=PICO_DEFAULT_I2C_SDA_PIN, uint gpioScl=PICO_DEFAULT_I2C_SCL_PIN, i2c_inst_t *busInstance=i2c0)</div></div>
 <div class="ttc" id="aclassI2c_1_1Ssd1306_html_aa7a0ce840cb1af0e1fece6e15bf46ae6"><div class="ttname"><a href="classI2c_1_1Ssd1306.html#aa7a0ce840cb1af0e1fece6e15bf46ae6">I2c::Ssd1306::writeRaw</a></div><div class="ttdeci">int writeRaw(const uint8_t *src, size_t len) override</div><div class="ttdoc">This function writes raw data to GDDRAM assuming Horizontal Addressing Mode.</div></div>
 <div class="ttc" id="aclassI2c_1_1Ssd1306_html_afda607bcdc3bb773618824203603149b"><div class="ttname"><a href="classI2c_1_1Ssd1306.html#afda607bcdc3bb773618824203603149b">I2c::Ssd1306::setData</a></div><div class="ttdeci">void setData(std::string s, size_t startPos=0)</div><div class="ttdoc">This function writes a string to GDDRAM assuming Horizontal Adressing Mode.</div></div>
 </div><!-- fragment --></div><!-- contents -->

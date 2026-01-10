@@ -67,12 +67,18 @@ void AccessPoint::runLoop()
 
 void AccessPoint::onTcpAccept()
 {
-    m_sCallbackOnTcpAccept();
+    if(m_sCallbackOnTcpAccept)
+    {
+        m_sCallbackOnTcpAccept();
+    }
 }
 
 void AccessPoint::onDhcpClientConnect()
 {
-    m_sCallbackOnDhcpConnect();
+    if(m_sCallbackOnDhcpConnect)
+    {
+        m_sCallbackOnDhcpConnect();
+    }
 }
 
 void AccessPoint::setDhcpLeaseTimeS(uint seconds)

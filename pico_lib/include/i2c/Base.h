@@ -18,6 +18,11 @@ namespace I2c
         inline static std::map<uint, bool> m_sInitializedBusMap{};
 
     public:
+        /// @brief 
+        /// @param addr 
+        /// @param gpioSda 
+        /// @param gpioScl 
+        /// @param busInstance 
         Base(uint addr,
              uint gpioSda = PICO_DEFAULT_I2C_SDA_PIN,
              uint gpioScl = PICO_DEFAULT_I2C_SCL_PIN,
@@ -25,6 +30,7 @@ namespace I2c
 
         ~Base();
 
+        /// @brief Prints I2C interface addresses
         void scan();
 
         /// @brief This function writes raw data to GDDRAM assuming Horizontal Addressing Mode

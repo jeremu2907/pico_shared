@@ -277,10 +277,12 @@ void DhcpServerCallback::dhcpServerProcess(void *arg, struct udp_pcb *upcb, stru
         if (memcmp(d->lease[yi].mac, dhcp_msg.chaddr, MAC_LEN) == 0)
         {
             // MAC match, ok to use this IP address
+            // Renew lease
         }
         else if (memcmp(d->lease[yi].mac, "\x00\x00\x00\x00\x00\x00", MAC_LEN) == 0)
         {
             // IP unused, ok to use this IP address
+            // New lease
             memcpy(d->lease[yi].mac, dhcp_msg.chaddr, MAC_LEN);
         }
         else
