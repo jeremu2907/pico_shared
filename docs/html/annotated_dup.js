@@ -13,7 +13,8 @@ var annotated_dup =
       [ "Ssd1306", "classI2c_1_1Ssd1306.html", "classI2c_1_1Ssd1306" ]
     ] ],
     [ "Pwm", null, [
-      [ "Output", "classPwm_1_1Output.html", "classPwm_1_1Output" ]
+      [ "Output", "classPwm_1_1Output.html", "classPwm_1_1Output" ],
+      [ "Servo", "classPwm_1_1Servo.html", "classPwm_1_1Servo" ]
     ] ],
     [ "Wifi", null, [
       [ "ApScan", "classWifi_1_1ApScan.html", "classWifi_1_1ApScan" ]

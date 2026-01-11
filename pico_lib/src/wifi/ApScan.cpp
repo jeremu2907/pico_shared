@@ -113,7 +113,7 @@ bool ApScan::scan()
             printf("✗ Not found in targeted scan\n");
             m_consecutiveFailures++;
 
-            // After 3 failures, switch to full scan
+            // After MAX_CONSECUTIVE_FAIL_SCANS failures, switch to full scan
             if (m_consecutiveFailures >= MAX_CONSECUTIVE_FAIL_SCANS)
             {
                 printf("Switching to full scan mode...\n");

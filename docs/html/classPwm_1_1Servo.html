@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.15.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Pico Shared: Pwm::Output Class Reference</title>
+<title>Pico Shared: Pwm::Servo Class Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -62,7 +62,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('classPwm_1_1Output.html','','classPwm_1_1Output-members'); });
+$(function(){initNavTree('classPwm_1_1Servo.html','','classPwm_1_1Servo-members'); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -88,25 +88,28 @@ $(function(){initNavTree('classPwm_1_1Output.html','','classPwm_1_1Output-member
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">Pwm::Output Class Reference</div></div>
+  <div class="headertitle"><div class="title">Pwm::Servo Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
 <div class="dynheader">
-Inheritance diagram for Pwm::Output:</div>
+Inheritance diagram for Pwm::Servo:</div>
 <div class="dyncontent">
  <div class="center">
-  <img src="classPwm_1_1Output.png" usemap="#Pwm_3A_3AOutput_map" alt=""/>
-  <map id="Pwm_3A_3AOutput_map" name="Pwm_3A_3AOutput_map">
+  <img src="classPwm_1_1Servo.png" usemap="#Pwm_3A_3AServo_map" alt=""/>
+  <map id="Pwm_3A_3AServo_map" name="Pwm_3A_3AServo_map">
+<area href="classPwm_1_1Output.html" alt="Pwm::Output" shape="rect" coords="0,56,81,80"/>
 <area href="classGpio_1_1Base.html" alt="Gpio::Base" shape="rect" coords="0,0,81,24"/>
-<area href="classPwm_1_1Servo.html" alt="Pwm::Servo" shape="rect" coords="0,112,81,136"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4634b554da81349b8fef31388cebaa1d" id="r_a4634b554da81349b8fef31388cebaa1d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4634b554da81349b8fef31388cebaa1d">Output</a> (uint <a class="el" href="classGpio_1_1Base.html#a0e64e86759ec18aebdc3d75add8d0270">gpio</a>, uint pwmPeriodMicroS, uint pwmDutyPeriodMicroS=0)</td></tr>
-<tr class="memitem:afd452c632668d4278129635dc84bb86c" id="r_afd452c632668d4278129635dc84bb86c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afd452c632668d4278129635dc84bb86c">setPwmDutyPeriodMicroS</a> (uint pwmDutyPeriodMicroS)</td></tr>
-<tr class="memitem:a478a4064d2c86e71bc80679f1c62409e" id="r_a478a4064d2c86e71bc80679f1c62409e"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a478a4064d2c86e71bc80679f1c62409e">calculateDutyPeriodMicroSFromDutyCycle</a> (uint dutyCycle)</td></tr>
+<tr class="memitem:ab8425a0b30a39b8ebb916bb4d8afcedc" id="r_ab8425a0b30a39b8ebb916bb4d8afcedc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab8425a0b30a39b8ebb916bb4d8afcedc">Servo</a> (double angleMin, double angleMax, uint pulseWidthMicroSMin, uint pulseWidthMicroSMax, uint <a class="el" href="classGpio_1_1Base.html#a0e64e86759ec18aebdc3d75add8d0270">gpio</a>, uint pwmPeriodMicroS, uint pwmDutyPeriodMicroS=0)</td></tr>
+<tr class="memitem:a681459bdd8494dd17499c3281dbcded5" id="r_a681459bdd8494dd17499c3281dbcded5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a681459bdd8494dd17499c3281dbcded5">setAngle</a> (double angle)</td></tr>
+<tr class="inherit_header pub_methods_classPwm_1_1Output"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classPwm_1_1Output')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classPwm_1_1Output.html">Pwm::Output</a></td></tr>
+<tr class="memitem:a4634b554da81349b8fef31388cebaa1d inherit pub_methods_classPwm_1_1Output" id="r_a4634b554da81349b8fef31388cebaa1d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPwm_1_1Output.html#a4634b554da81349b8fef31388cebaa1d">Output</a> (uint <a class="el" href="classGpio_1_1Base.html#a0e64e86759ec18aebdc3d75add8d0270">gpio</a>, uint pwmPeriodMicroS, uint pwmDutyPeriodMicroS=0)</td></tr>
+<tr class="memitem:afd452c632668d4278129635dc84bb86c inherit pub_methods_classPwm_1_1Output" id="r_afd452c632668d4278129635dc84bb86c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPwm_1_1Output.html#afd452c632668d4278129635dc84bb86c">setPwmDutyPeriodMicroS</a> (uint pwmDutyPeriodMicroS)</td></tr>
+<tr class="memitem:a478a4064d2c86e71bc80679f1c62409e inherit pub_methods_classPwm_1_1Output" id="r_a478a4064d2c86e71bc80679f1c62409e"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classPwm_1_1Output.html#a478a4064d2c86e71bc80679f1c62409e">calculateDutyPeriodMicroSFromDutyCycle</a> (uint dutyCycle)</td></tr>
 <tr class="inherit_header pub_methods_classGpio_1_1Base"><td colspan="2" onclick="javascript:dynsection.toggleInherit('pub_methods_classGpio_1_1Base')"><span class="dynarrow"><span class="arrowhead closed"></span></span>Public Member Functions inherited from <a class="el" href="classGpio_1_1Base.html">Gpio::Base</a></td></tr>
 <tr class="memitem:a146d7eff7200c1358df9ca9c7054ee8b inherit pub_methods_classGpio_1_1Base" id="r_a146d7eff7200c1358df9ca9c7054ee8b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGpio_1_1Base.html#a146d7eff7200c1358df9ca9c7054ee8b">Base</a> (uint <a class="el" href="classGpio_1_1Base.html#a0e64e86759ec18aebdc3d75add8d0270">gpio</a>)</td></tr>
 <tr class="memitem:a0e64e86759ec18aebdc3d75add8d0270 inherit pub_methods_classGpio_1_1Base" id="r_a0e64e86759ec18aebdc3d75add8d0270"><td class="memItemLeft" align="right" valign="top">uint&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGpio_1_1Base.html#a0e64e86759ec18aebdc3d75add8d0270">gpio</a> () const</td></tr>
@@ -120,15 +123,35 @@ Additional Inherited Members</h2></td></tr>
 uint&#160;</td><td class="memItemRight" valign="bottom"><b>m_gpio</b></td></tr>
 </table>
 <a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a4634b554da81349b8fef31388cebaa1d" name="a4634b554da81349b8fef31388cebaa1d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4634b554da81349b8fef31388cebaa1d">&#9670;&#160;</a></span>Output()</h2>
+<a id="ab8425a0b30a39b8ebb916bb4d8afcedc" name="ab8425a0b30a39b8ebb916bb4d8afcedc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8425a0b30a39b8ebb916bb4d8afcedc">&#9670;&#160;</a></span>Servo()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">Pwm::Output::Output </td>
+          <td class="memname">Pwm::Servo::Servo </td>
           <td>(</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>angleMin</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>angleMax</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>pulseWidthMicroSMin</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>pulseWidthMicroSMax</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>gpio</em></span>, </td>
         </tr>
         <tr>
@@ -148,6 +171,9 @@ uint&#160;</td><td class="memItemRight" valign="bottom"><b>m_gpio</b></td></tr>
     <tr><td class="paramname">gpio</td><td></td></tr>
     <tr><td class="paramname">pwmPeriodMicroS</td><td></td></tr>
     <tr><td class="paramname">pwmDutyPeriodMicroS</td><td></td></tr>
+    <tr><td class="paramname">angleMin</td><td></td></tr>
+    <tr><td class="paramname">angleMax</td><td></td></tr>
+    <tr><td class="paramname"></td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -155,47 +181,23 @@ uint&#160;</td><td class="memItemRight" valign="bottom"><b>m_gpio</b></td></tr>
 </div>
 </div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a478a4064d2c86e71bc80679f1c62409e" name="a478a4064d2c86e71bc80679f1c62409e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a478a4064d2c86e71bc80679f1c62409e">&#9670;&#160;</a></span>calculateDutyPeriodMicroSFromDutyCycle()</h2>
+<a id="a681459bdd8494dd17499c3281dbcded5" name="a681459bdd8494dd17499c3281dbcded5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a681459bdd8494dd17499c3281dbcded5">&#9670;&#160;</a></span>setAngle()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">uint Pwm::Output::calculateDutyPeriodMicroSFromDutyCycle </td>
+          <td class="memname">void Pwm::Servo::setAngle </td>
           <td>(</td>
-          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>dutyCycle</em></span></td><td>)</td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>angle</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">dutyCycle</td><td>in percent (ie dutyCycle = 1 = 1%) </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>Duty period in microseconds </dd></dl>
-
-</div>
-</div>
-<a id="afd452c632668d4278129635dc84bb86c" name="afd452c632668d4278129635dc84bb86c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd452c632668d4278129635dc84bb86c">&#9670;&#160;</a></span>setPwmDutyPeriodMicroS()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void Pwm::Output::setPwmDutyPeriodMicroS </td>
-          <td>(</td>
-          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>pwmDutyPeriodMicroS</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pwmDutyPeriodMicroS</td><td></td></tr>
+    <tr><td class="paramname">angle</td><td></td></tr>
   </table>
   </dd>
 </dl>
@@ -203,7 +205,7 @@ uint&#160;</td><td class="memItemRight" valign="bottom"><b>m_gpio</b></td></tr>
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>pwm/<a class="el" href="pwm_2Output_8hpp_source.html">Output.hpp</a></li>
+<li>pwm/<a class="el" href="Servo_8hpp_source.html">Servo.hpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->
@@ -218,7 +220,7 @@ uint&#160;</td><td class="memItemRight" valign="bottom"><b>m_gpio</b></td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><b>Pwm</b></li><li class="navelem"><a href="classPwm_1_1Output.html">Output</a></li>
+    <li class="navelem"><b>Pwm</b></li><li class="navelem"><a href="classPwm_1_1Servo.html">Servo</a></li>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.15.0 </li>
   </ul>
 </div>

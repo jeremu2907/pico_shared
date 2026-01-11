@@ -5,7 +5,10 @@
 
 using namespace Pwm;
 
-Output::Output(uint gpio, uint pwmPeriodMicroS, uint pwmDutyPeriodMicroS): Gpio::Base(gpio)
+Output::Output(uint gpio,
+               uint pwmPeriodMicroS,
+               uint pwmDutyPeriodMicroS) : Gpio::Base(gpio),
+                                           m_pwmPeriodMicroS(pwmPeriodMicroS)
 {
     gpio_set_function(gpio, GPIO_FUNC_PWM);
     m_sliceNum = pwm_gpio_to_slice_num(gpio);
@@ -28,4 +31,9 @@ Output::Output(uint gpio, uint pwmPeriodMicroS, uint pwmDutyPeriodMicroS): Gpio:
 void Output::setPwmDutyPeriodMicroS(uint pwmDutyPeriodMicroS)
 {
     pwm_set_chan_level(m_sliceNum, m_channel, pwmDutyPeriodMicroS);
+}
+
+uint Output::calculateDutyPeriodMicroSFromDutyCycle(uint dutyCycle)
+{
+    return (dutyCycle * m_pwmPeriodMicroS) / 100;
 }
