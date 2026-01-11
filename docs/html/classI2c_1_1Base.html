@@ -103,10 +103,10 @@ Inheritance diagram for I2c::Base:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:abd80427d32de6d50c40eee8bd7008df8" id="r_abd80427d32de6d50c40eee8bd7008df8"><td class="memItemLeft" align="right" valign="top"><a id="abd80427d32de6d50c40eee8bd7008df8" name="abd80427d32de6d50c40eee8bd7008df8"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>Base</b> (uint addr, uint gpioSda=PICO_DEFAULT_I2C_SDA_PIN, uint gpioScl=PICO_DEFAULT_I2C_SCL_PIN, i2c_inst_t *busInstance=i2c0)</td></tr>
+<tr class="memitem:abd80427d32de6d50c40eee8bd7008df8" id="r_abd80427d32de6d50c40eee8bd7008df8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd80427d32de6d50c40eee8bd7008df8">Base</a> (uint addr, uint gpioSda=PICO_DEFAULT_I2C_SDA_PIN, uint gpioScl=PICO_DEFAULT_I2C_SCL_PIN, i2c_inst_t *busInstance=i2c0)</td></tr>
 <tr class="memitem:a9d6f9517e8451c235b809510b25f0b32" id="r_a9d6f9517e8451c235b809510b25f0b32"><td class="memItemLeft" align="right" valign="top"><a id="a9d6f9517e8451c235b809510b25f0b32" name="a9d6f9517e8451c235b809510b25f0b32"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>scan</b> ()</td></tr>
+<tr class="memdesc:a9d6f9517e8451c235b809510b25f0b32"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints I2C interface addresses. <br /></td></tr>
 <tr class="memitem:ae1a95a46f29177a13a29ff20902e75ae" id="r_ae1a95a46f29177a13a29ff20902e75ae"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae1a95a46f29177a13a29ff20902e75ae">writeRaw</a> (const uint8_t *src, size_t len)</td></tr>
 <tr class="memdesc:ae1a95a46f29177a13a29ff20902e75ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function writes raw data to GDDRAM assuming Horizontal Addressing Mode.  <br /></td></tr>
 </table><table class="memberdecls">
@@ -128,15 +128,56 @@ i2c_inst_t *&#160;</td><td class="memItemRight" valign="bottom"><b>getBusInstanc
 Protected Attributes</h2></td></tr>
 <tr class="memitem:a9d3381b1131747b63ebfe60b6e9cb035" id="r_a9d3381b1131747b63ebfe60b6e9cb035"><td class="memItemLeft" align="right" valign="top"><a id="a9d3381b1131747b63ebfe60b6e9cb035" name="a9d3381b1131747b63ebfe60b6e9cb035"></a>
 uint&#160;</td><td class="memItemRight" valign="bottom"><b>m_addr</b></td></tr>
-<tr class="memitem:a4faefb0963e31596a284aa04fe9ded69" id="r_a4faefb0963e31596a284aa04fe9ded69"><td class="memItemLeft" align="right" valign="top"><a id="a4faefb0963e31596a284aa04fe9ded69" name="a4faefb0963e31596a284aa04fe9ded69"></a>
-uint&#160;</td><td class="memItemRight" valign="bottom"><b>m_gpioScl</b></td></tr>
-<tr class="memitem:accb98d4d57b58b917a5ac64107d54059" id="r_accb98d4d57b58b917a5ac64107d54059"><td class="memItemLeft" align="right" valign="top"><a id="accb98d4d57b58b917a5ac64107d54059" name="accb98d4d57b58b917a5ac64107d54059"></a>
-uint&#160;</td><td class="memItemRight" valign="bottom"><b>m_gpioSda</b></td></tr>
 <tr class="memitem:ae69d897d4effd8cc3e8e8242f8fb6b6c" id="r_ae69d897d4effd8cc3e8e8242f8fb6b6c"><td class="memItemLeft" align="right" valign="top"><a id="ae69d897d4effd8cc3e8e8242f8fb6b6c" name="ae69d897d4effd8cc3e8e8242f8fb6b6c"></a>
 uint&#160;</td><td class="memItemRight" valign="bottom"><b>m_baudrate</b></td></tr>
 <tr class="memitem:a2ba3a43cfdb92115a26356dc2eb5d4a4" id="r_a2ba3a43cfdb92115a26356dc2eb5d4a4"><td class="memItemLeft" align="right" valign="top"><a id="a2ba3a43cfdb92115a26356dc2eb5d4a4" name="a2ba3a43cfdb92115a26356dc2eb5d4a4"></a>
 uint&#160;</td><td class="memItemRight" valign="bottom"><b>m_busNumber</b></td></tr>
+<tr class="memitem:a4c11563fff1df3814991f1ef10b21fb1" id="r_a4c11563fff1df3814991f1ef10b21fb1"><td class="memItemLeft" align="right" valign="top"><a id="a4c11563fff1df3814991f1ef10b21fb1" name="a4c11563fff1df3814991f1ef10b21fb1"></a>
+<a class="el" href="classGpio_1_1Base.html">Gpio::Base</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_gpioScl</b></td></tr>
+<tr class="memitem:a983af5d7fef736abeef2090e90b62472" id="r_a983af5d7fef736abeef2090e90b62472"><td class="memItemLeft" align="right" valign="top"><a id="a983af5d7fef736abeef2090e90b62472" name="a983af5d7fef736abeef2090e90b62472"></a>
+<a class="el" href="classGpio_1_1Base.html">Gpio::Base</a>&#160;</td><td class="memItemRight" valign="bottom"><b>m_gpioSda</b></td></tr>
 </table>
+<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="abd80427d32de6d50c40eee8bd7008df8" name="abd80427d32de6d50c40eee8bd7008df8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd80427d32de6d50c40eee8bd7008df8">&#9670;&#160;</a></span>Base()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">I2c::Base::Base </td>
+          <td>(</td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>addr</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>gpioSda</em></span><span class="paramdefsep"> = </span><span class="paramdefval">PICO_DEFAULT_I2C_SDA_PIN</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint</td>          <td class="paramname"><span class="paramname"><em>gpioScl</em></span><span class="paramdefsep"> = </span><span class="paramdefval">PICO_DEFAULT_I2C_SCL_PIN</span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">i2c_inst_t *</td>          <td class="paramname"><span class="paramname"><em>busInstance</em></span><span class="paramdefsep"> = </span><span class="paramdefval">i2c0</span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">addr</td><td></td></tr>
+    <tr><td class="paramname">gpioSda</td><td></td></tr>
+    <tr><td class="paramname">gpioScl</td><td></td></tr>
+    <tr><td class="paramname">busInstance</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="ae1a95a46f29177a13a29ff20902e75ae" name="ae1a95a46f29177a13a29ff20902e75ae"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae1a95a46f29177a13a29ff20902e75ae">&#9670;&#160;</a></span>writeRaw()</h2>

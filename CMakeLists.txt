@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(PROJECT_NAME Main)
 
-set(PICO_BOARD pico2_w CACHE STRING "Board type")
+set(PICO_BOARD pico_w CACHE STRING "Board type")
 
 include(/root/pico-sdk/external/pico_sdk_import.cmake)
 
@@ -14,7 +14,6 @@ project(${PROJECT_NAME} C CXX ASM)
 pico_sdk_init()
 
 add_subdirectory(../pico_lib pico_lib_build)
-add_subdirectory(extern)
 
 add_executable(${PROJECT_NAME}
     main.cpp
@@ -30,18 +29,16 @@ target_link_libraries(${PROJECT_NAME} PRIVATE pico_stdlib)
 
 if((PICO_BOARD STREQUAL "pico_w") OR (PICO_BOARD STREQUAL "pico2_w"))
     target_link_libraries(${PROJECT_NAME} PRIVATE
-        pico_cyw43_arch_lwip_threadsafe_background
+        pico_cyw43_arch_lwip_poll
     )
 endif()
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
-    Extern
     Shared
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_LIST_DIR}
-    ${CMAKE_CURRENT_LIST_DIR}/extern/include
     ${CMAKE_CURRENT_LIST_DIR}/pico_lib/include
 )
 

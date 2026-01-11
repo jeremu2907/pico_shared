@@ -1,33 +1,31 @@
 #pragma once
 
-#include <functional>
-#include <vector>
-#include <cstdio>
 #include <map>
-#include "pico/stdlib.h"
 
-#include "Macros.hpp"
+#include "pico/stdlib.h"
 
 namespace Gpio
 {
     class Base
     {
     private:
-        inline static std::map<uint, bool> s_claimedPinMap{};
+        inline static std::map<uint, bool> m_sClaimedPinMap{};
 
     public:
+        /// @brief 
+        /// @param gpio 
         Base(uint gpio);
+
         ~Base();
 
+        /// @brief 
+        /// @return gpio
         uint gpio() const;
-        virtual void init();
 
-        static void onboardLedOn();
-        static void onboardLedOff();
+        /// @brief
+        virtual void init(){};
 
     protected:
         uint m_gpio;
-        bool m_out;
-        bool m_high;
     };
 }

@@ -1,41 +1,32 @@
 #pragma once
 
 #include <functional>
-#include <stdint.h>
-#include <thread>
-#include <cstdio>
-#include <atomic>
-#include <map>
-#include "hardware/adc.h"
-#include "pico/stdlib.h"
 
-#include "Macros.hpp"
-#include "Constants.hpp"
+#include <pico/stdlib.h>
+
+#include "gpio/Base.hpp"
 
 namespace Adc
 {
-    class Input
+    class Input : public Gpio::Base
     {
-    public:
-        static inline constexpr uint GPIO_26_ADC = 0;
-        static inline constexpr uint GPIO_27_ADC = 1;
-        static inline constexpr uint GPIO_28_ADC = 2;
-        static inline constexpr float PICO_2_W_ADC_RESOLUTION = 4095.0f;
-
     private:
-        inline static std::map<uint, bool> s_claimedPinMap{};
-        inline static std::vector<Input *> s_inputQueue = {};
-        inline static bool s_init = false;
-        inline static bool s_running = true;
+        inline static std::vector<Input *> m_sInputQueue = {};
+        inline static bool m_sInit = false;
+        inline static bool m_sRunning = true;
 
     public:
-        explicit Input(uint gpio, uint adcIdx);
+        /// @brief 
+        /// @param gpio 
+        explicit Input(uint gpio);
         ~Input();
 
-        void init();
-
+        /// @brief 
         static void runLoop();
 
+        /// @brief Installs callback on ADC input voltage is sampled
+        /// @tparam Func of type void(float voltage)
+        /// @param f callback takes in 1 arg that is the voltage float
         template <typename Func>
         void installCallback(Func f)
         {
@@ -43,10 +34,11 @@ namespace Adc
         }
 
     private:
+        void init() override;
+        uint getAdcIndex();
+
         void callback(float voltage);
 
         std::function<void(float voltage)> m_callback;
-        uint m_gpio;
-        uint m_adcIdx;
     };
 }

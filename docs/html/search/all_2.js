@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gpio_0',['gpio',['../classGpio_1_1Base.html#a0e64e86759ec18aebdc3d75add8d0270',1,'Gpio::Base']]]
+  ['calculatedutyperiodmicrosfromdutycycle_0',['calculateDutyPeriodMicroSFromDutyCycle',['../classPwm_1_1Output.html#a478a4064d2c86e71bc80679f1c62409e',1,'Pwm::Output']]]
 ];

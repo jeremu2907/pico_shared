@@ -38,7 +38,7 @@ void Ssd1306::setData(std::string s, size_t startPos)
 int Ssd1306::writeData()
 {
     m_data[0] = static_cast<uint8_t>(ControlByte::NO_CO_DATA);
-    return writeBlocking(m_data, s_TOTAL_SEGMENTS + 1);
+    return writeBlocking(m_data, TOTAL_SEGMENTS + 1);
 }
 
 void Ssd1306::clearData()
@@ -49,7 +49,7 @@ void Ssd1306::clearData()
     }
 
     m_data_left_ptr = 0;
-    m_data_right_ptr = s_TOTAL_SEGMENTS;
+    m_data_right_ptr = TOTAL_SEGMENTS;
 }
 
 int Ssd1306::writeRaw(const uint8_t *src, size_t len)

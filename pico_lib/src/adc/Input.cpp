@@ -1,54 +1,75 @@
+#include <cstdio>
+
+#include "hardware/adc.h"
+#include "Macros.hpp"
+#include "Constants.hpp"
+
 #include "adc/Input.hpp"
 
 using namespace Adc;
 
-Input::Input(uint gpio, uint adcIdx) : m_gpio(gpio),
-                                       m_adcIdx(adcIdx)
+Input::Input(uint gpio) : Gpio::Base(gpio)
 {
-    if(!s_init)
+    if (!m_sInit)
     {
-        s_init = true;
+        m_sInit = true;
         adc_init();
     }
 
-    if(m_gpio < 26 || m_gpio > 29)
+    if (getAdcIndex() == -1)
     {
         ERR_START
         printf("Error: GPIO %u must be [26, 29]\n", gpio);
         ERR_END
     }
 
-    if (s_claimedPinMap.count(gpio) > 0)
-    { 
-        ERR_START
-        printf("Error: GPIO %u already claimed!\n", gpio);
-        ERR_END
-    }
     init();
-    s_inputQueue.emplace_back(this);
+    m_sInputQueue.emplace_back(this);
 }
 
 Input::~Input()
 {
-    s_running = false;
-    s_inputQueue.clear();
+    m_sRunning = false;
+    m_sInputQueue.clear();
+}
+
+uint Input::getAdcIndex()
+{
+    switch (m_gpio)
+    {
+    case 26:
+        return 0;
+    case 27:
+        return 1;
+    case 28:
+        return 2;
+    case 29:
+        return 3;
+    default:
+        return -1;
+    }
 }
 
 void Input::init()
 {
-    s_claimedPinMap[m_gpio] = true;
     adc_gpio_init(m_gpio);
 }
 
 void Input::runLoop()
 {
-    if(!s_running) return;
-    for (auto &input : s_inputQueue)
+    if (!m_sRunning)
+        return;
+    for (auto &input : m_sInputQueue)
     {
-        adc_select_input(input->m_adcIdx);
+        uint idx = input->getAdcIndex();
+        if (idx == -1)
+        {
+            continue;
+        }
+        adc_select_input(idx);
         sleep_ms(10);
         auto raw = adc_read();
-        float voltage = (raw / PICO_2_W_ADC_RESOLUTION) * MAX_VOLTAGE;
+        float voltage = (raw / ADC_RESOLUTION) * MAX_VOLTAGE;
         input->callback(voltage);
     }
 }

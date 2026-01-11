@@ -1,11 +1,11 @@
 #pragma once
 
 #include <map>
-#include <stdio.h>
-#include <cstring>
 
 #include "pico/stdlib.h"
 #include "hardware/i2c.h"
+
+#include "gpio/Base.hpp"
 
 namespace I2c
 {
@@ -15,9 +15,14 @@ namespace I2c
         static inline constexpr uint DEFAULT_BAUDRATE_HZ = 400000;
 
     private:
-        inline static std::map<uint, bool> s_initializedBusMap{};
+        inline static std::map<uint, bool> m_sInitializedBusMap{};
 
     public:
+        /// @brief 
+        /// @param addr 
+        /// @param gpioSda 
+        /// @param gpioScl 
+        /// @param busInstance 
         Base(uint addr,
              uint gpioSda = PICO_DEFAULT_I2C_SDA_PIN,
              uint gpioScl = PICO_DEFAULT_I2C_SCL_PIN,
@@ -25,6 +30,7 @@ namespace I2c
 
         ~Base();
 
+        /// @brief Prints I2C interface addresses
         void scan();
 
         /// @brief This function writes raw data to GDDRAM assuming Horizontal Addressing Mode
@@ -43,9 +49,12 @@ namespace I2c
         i2c_inst_t *getBusInstance();
 
         uint m_addr;
-        uint m_gpioScl;
-        uint m_gpioSda;
         uint m_baudrate;
         uint m_busNumber;
+        Gpio::Base m_gpioScl;
+        Gpio::Base m_gpioSda;
+
+    private:
+        void init();
     };
 }
