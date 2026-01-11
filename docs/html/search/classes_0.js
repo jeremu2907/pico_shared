@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['accesspoint_0',['AccessPoint',['../classWifi_1_1AccessPoint.html',1,'Wifi']]]
+  ['apscan_0',['ApScan',['../classWifi_1_1ApScan.html',1,'Wifi']]]
 ];

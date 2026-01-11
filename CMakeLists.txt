@@ -5,7 +5,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(PROJECT_NAME Main)
 
-set(PICO_BOARD pico2_w CACHE STRING "Board type")
+set(PICO_BOARD pico_w CACHE STRING "Board type")
 
 include(/root/pico-sdk/external/pico_sdk_import.cmake)
 
@@ -29,7 +29,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE pico_stdlib)
 
 if((PICO_BOARD STREQUAL "pico_w") OR (PICO_BOARD STREQUAL "pico2_w"))
     target_link_libraries(${PROJECT_NAME} PRIVATE
-        pico_cyw43_arch_lwip_threadsafe_background
+        pico_cyw43_arch_lwip_poll
     )
 endif()
 

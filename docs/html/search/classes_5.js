@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['output_0',['Output',['../classGpio_1_1Output.html',1,'Gpio::Output'],['../classPwm_1_1Output.html',1,'Pwm::Output']]]
+  ['ssd1306_0',['Ssd1306',['../classI2c_1_1Ssd1306.html',1,'I2c']]]
 ];

@@ -1,39 +1,42 @@
 #include "pico/stdlib.h"
-#include "pico/cyw43_arch.h"
 
-#include "wifi/AccessPoint.hpp"
-#include "pwm/Output.hpp"
+#include "wifi/ApScan.hpp"
+#include "gpio/Output.hpp"
 #include "Macros.hpp"
 
-#include "pico/cyw43_arch.h"
+#define SSID "_____jeremy_phone_____"
 
 int main()
 {
     stdio_init_all();
+    sleep_ms(2000);
 
-    if (cyw43_arch_init())
-    {
-        printf("failed to initialise cyw43_arch\n");
-        return 1;
-    }
+    Wifi::ApScan scanner(SSID);
+    Gpio::Output led(0);
 
-    // cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, 1);
-    Wifi::AccessPoint ap("pico_test_ap", "password");
-    ap.installCallbackOnDhcpConnect(
-        []()
-        {
-            printf("##############################\n");
-            printf("Hello\n");
-            printf("##############################\n");
-        }
-    );
-
+    int consecutiveFailures = 0;
 
     MAIN_LOOP_START
-    ap.runLoop();
+        bool found = scanner.scan();
+        
+        scanner.printResults();
+        
+        if (found) {
+            consecutiveFailures = 0;
+            led.setHigh();
+        } else {
+            consecutiveFailures++;
+            if(consecutiveFailures > 3)
+            {
+                led.setLow();
+            }
+        }
+        
+        int waitMs = 200;
+        printf("\nWaiting %d ms before next scan...\n", waitMs);
+        printf("========================================\n\n");
+        sleep_ms(waitMs);
     MAIN_LOOP_END
 
-    cyw43_arch_deinit();
-    printf("Main complete\n");
     return 0;
 }

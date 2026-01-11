@@ -23,8 +23,7 @@ target_link_libraries(${PROJECT_NAME}
 
 if((PICO_BOARD STREQUAL "pico_w") OR (PICO_BOARD STREQUAL "pico2_w"))
     target_link_libraries(${PROJECT_NAME} PRIVATE
-        pico_lwip_nosys
-        pico_cyw43_arch_lwip_threadsafe_background
+        pico_cyw43_arch_lwip_poll
     )
 endif()
 

@@ -42,7 +42,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"AccessPoint_8hpp_source.html"
+"ApScan_8hpp_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';
