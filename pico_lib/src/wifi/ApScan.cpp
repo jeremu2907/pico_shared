@@ -6,7 +6,11 @@ using namespace Wifi;
 ApScan *ApScan::m_sCurrentInstance = nullptr;
 
 ApScan::ApScan(const char *targetSsid)
-    : m_scanResultCount(0), m_knownChannel(0), m_consecutiveFailures(0), m_useTargetedScan(true), m_targetFound(false)
+    : m_scanResultCount(0),
+      m_knownChannel(0),
+      m_consecutiveFailures(0),
+      m_useTargetedScan(true),
+      m_targetFound(false)
 {
     strncpy(m_targetSsid, targetSsid, sizeof(m_targetSsid) - 1);
     m_targetSsid[sizeof(m_targetSsid) - 1] = '\0';
@@ -39,6 +43,7 @@ int ApScan::scanCallback(void *env, const cyw43_ev_scan_result_t *result)
                sizeof(cyw43_ev_scan_result_t));
         m_sCurrentInstance->m_scanResultCount++;
     }
+
     return 0;
 }
 
@@ -57,7 +62,11 @@ int ApScan::scanForTarget()
 
     if (err == 0)
     {
-        sleep_ms(1500); // Targeted scan is faster than full scan
+        while(cyw43_wifi_scan_active(&cyw43_state))
+        {
+            cyw43_arch_poll();
+            sleep_ms(1);
+        }
         return m_scanResultCount;
     }
 
@@ -76,7 +85,11 @@ int ApScan::scanAll()
 
     if (err == 0)
     {
-        sleep_ms(3000); // Full scan takes longer
+        while(cyw43_wifi_scan_active(&cyw43_state))
+        {
+            cyw43_arch_poll();
+            sleep_ms(1);
+        }
         return m_scanResultCount;
     }
 
@@ -89,34 +102,30 @@ bool ApScan::scan()
 
     if (m_useTargetedScan)
     {
-        printf("=== Quick Scan for '%s' ===\n", m_targetSsid);
+        // printf("Quick Scan for '%s'\n", m_targetSsid);
 
         // Try targeted SSID scan first (faster)
         int found = scanForTarget();
 
         if (found > 0)
         {
-            printf("✓ Found via targeted scan!\n");
+            printf("Found via targeted scan!\n");
 
-            // Remember the channel for future reference
-            if (m_scanResultCount > 0)
-            {
-                m_knownChannel = m_scanResults[0].channel;
-                printf("Detected on channel: %d\n", m_knownChannel);
-            }
+            m_knownChannel = m_scanResults[0].channel;
+            // printf("Detected on channel: %d\n", m_knownChannel);
 
             m_consecutiveFailures = 0;
             m_targetFound = true;
         }
         else
         {
-            printf("✗ Not found in targeted scan\n");
+            printf("Not found in targeted scan\n");
             m_consecutiveFailures++;
 
             // After MAX_CONSECUTIVE_FAIL_SCANS failures, switch to full scan
             if (m_consecutiveFailures >= MAX_CONSECUTIVE_FAIL_SCANS)
             {
-                printf("Switching to full scan mode...\n");
+                // printf("Switching to full scan mode...\n");
                 m_useTargetedScan = false;
                 m_consecutiveFailures = 0;
             }
@@ -125,9 +134,11 @@ bool ApScan::scan()
     else
     {
         // Full scan mode
-        printf("=== Full Scan (All Channels) ===\n");
+        // printf("Full Scan (All Channels)\n");
 
-        if (scanAll() > 0)
+        int found = scanAll();
+
+        if (found > 0)
         {
             // Check if our target is in the results
             for (int i = 0; i < m_scanResultCount; i++)
@@ -140,7 +151,7 @@ bool ApScan::scan()
                 {
                     m_targetFound = true;
                     m_knownChannel = m_scanResults[i].channel;
-                    printf("✓ Found '%s' on channel %d\n", m_targetSsid, m_knownChannel);
+                    // printf("Found '%s' on channel %d\n", m_targetSsid, m_knownChannel);
 
                     // Switch back to targeted scan now that we found it
                     m_useTargetedScan = true;
@@ -150,7 +161,7 @@ bool ApScan::scan()
 
             if (!m_targetFound)
             {
-                printf("✗ Target AP not in range\n");
+                printf("Target AP not in range\n");
             }
         }
         else
