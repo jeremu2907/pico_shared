@@ -61,7 +61,7 @@ namespace Wifi
         bool m_useTargetedScan;
         int m_consecutiveFailures;
         cyw43_ev_scan_result_t m_scanResults[MAX_RESULTS];
-
+        
         static ApScan *m_sCurrentInstance;
         static int scanCallback(void *env, const cyw43_ev_scan_result_t *result);
     };

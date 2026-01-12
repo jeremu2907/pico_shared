@@ -32,7 +32,7 @@ int main()
     MAIN_LOOP_START
     if (scanner.scan())
     {
-        if(firstConnect || consecutiveFailures >= MAX_TIME_FAIL)
+        if (firstConnect || consecutiveFailures >= MAX_TIME_FAIL)
         {
             led.setHigh();
             toggleServo(servo);
@@ -43,8 +43,9 @@ int main()
     }
     else
     {
-        if(consecutiveFailures > MAX_TIME_FAIL)
+        if (consecutiveFailures > MAX_TIME_FAIL)
         {
+            sleep_ms(200);
             continue;
         }
 
@@ -54,9 +55,7 @@ int main()
             toggleServo(servo);
         }
     }
-
-    int waitMs = 200;
-    sleep_ms(waitMs);
+    sleep_ms(200);
     MAIN_LOOP_END
 
     return 0;
