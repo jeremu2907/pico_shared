@@ -48,5 +48,7 @@ namespace Gpio
 
         std::function<void()> m_callbackLow;
         std::function<void()> m_callbackHigh;
+
+        bool m_high;
     };
 }

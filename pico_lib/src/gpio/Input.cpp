@@ -1,4 +1,5 @@
 #include "gpio/Input.hpp"
+#include <cstdio> 
 
 using namespace Gpio;
 
@@ -27,6 +28,12 @@ void Input::runLoop()
     for (auto &input : m_sInputQueue)
     {
         bool high = gpio_get(input->m_gpio);
+
+        if(input->m_high == high)
+        {
+            continue;
+        }
+
         if (high)
         {
             input->callbackHigh();
@@ -35,6 +42,8 @@ void Input::runLoop()
         {
             input->callbackLow();
         }
+
+        input->m_high = high;
     }
 }
 
